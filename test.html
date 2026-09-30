@@ -1,30 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UKM Esport - Campus Gaming Hub</title>
 
-    <title>Organization Management System</title>
-
-    <!-- Connect HTML to CSS -->
+    <!-- Sambungkan ke CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- HEADER -->
+    <!-- HEADER / NAVIGASI UTAMA -->
     <header class="header">
         <div class="container navbar">
 
             <div class="logo">
-                Organization Management System
+                <span class="logo-icon">🎮</span> ESPORT UMM
             </div>
 
             <nav>
                 <ul class="nav-menu">
                     <li><a href="#beranda">Beranda</a></li>
-                    <li><a href="#anggota">Anggota & Divisi</a></li>
+                    <li><a href="#anggota">Divisi & Roster</a></li>
                     <li><a href="#program">Program Kerja</a></li>
                     <li><a href="#kegiatan">Kegiatan</a></li>
                     <li><a href="#laporan">Laporan</a></li>
@@ -35,292 +34,255 @@
     </header>
 
 
-    <!-- MAIN -->
+    <!-- KANDUNGAN UTAMA -->
     <main>
 
-        <!-- BERANDA / HERO -->
+        <!-- HERO SECTION -->
         <section id="beranda" class="hero">
-
             <div class="container hero-content">
 
                 <div class="hero-text">
-
-                    <span class="tag">Organization Platform</span>
-
+                    <span class="tag">Unit Kegiatan Mahasiswa Esports</span>
                     <h1>
-                        Kelola Organisasi dalam
-                        <span>Satu Platform</span>
+                        Wadah Bakat & Prestasi Gaming
+                        <span>Mahasiswa</span>
                     </h1>
-
                     <p>
-                        Organization Management System membantu mahasiswa
-                        mengelola anggota, divisi, program kerja, kegiatan,
-                        dan laporan organisasi secara terintegrasi.
+                        Pusat pengelolaan divisi game, turnamen kampus, latihan rutin (scrim), serta pengembangan talent shoutcaster & media streaming secara profesional.
                     </p>
-
-                    <a href="#program" class="button">
-                        Lihat Program Kerja
-                    </a>
-
+                    <div class="hero-buttons">
+                        <a href="#program" class="button">Lihat Turnamen</a>
+                        <a href="#anggota" class="button button-outline">Eksplor Divisi</a>
+                    </div>
                 </div>
 
-                <div class="hero-card">
-
-                    <h3>Kelola Organisasi</h3>
-
-                    <div class="stat-box">
-                        <strong>120+</strong>
-                        <span>Anggota Aktif</span>
+                <div class="hero-visual">
+                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80" alt="Esports Gaming Arena" class="hero-img">
+                    <div class="hero-card-floating">
+                        <div class="stat-box">
+                            <strong>60+</strong>
+                            <span>Pro Player</span>
+                        </div>
+                        <div class="stat-box">
+                            <strong>4</strong>
+                            <span>Divisi Game</span>
+                        </div>
+                        <div class="stat-box">
+                            <strong>12</strong>
+                            <span>Trophy Kampus</span>
+                        </div>
                     </div>
-
-                    <div class="stat-box">
-                        <strong>8</strong>
-                        <span>Divisi</span>
-                    </div>
-
-                    <div class="stat-box">
-                        <strong>15</strong>
-                        <span>Program Kerja</span>
-                    </div>
-
                 </div>
 
             </div>
-
         </section>
 
 
-        <!-- ANGGOTA DAN DIVISI -->
+        <!-- ANGGOTA DAN DIVISI GAME -->
         <section id="anggota" class="section">
-
             <div class="container">
 
                 <div class="section-heading">
-                    <span class="tag">Anggota</span>
-                    <h2>Anggota & Divisi</h2>
+                    <span class="tag">Game Division</span>
+                    <h2>Divisi Game & Talent</h2>
                     <p>
-                        Kelola data anggota organisasi berdasarkan
-                        divisi dan tanggung jawab masing-masing.
+                        Daftar divisi game kompetitif dan tim official UKM Esport kampus.
                     </p>
                 </div>
 
                 <div class="card-grid">
 
                     <article class="card">
-                        <div class="icon">👥</div>
-                        <h3>Pengurus Inti</h3>
-                        <p>
-                            Mengelola kepemimpinan dan koordinasi
-                            utama organisasi.
-                        </p>
+                        <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80" alt="Divisi PC Gaming" class="card-img">
+                        <div class="card-body">
+                            <div class="icon">🎯</div>
+                            <h3>Divisi Valorant (FPS)</h3>
+                            <p>
+                                Fokus pada taktik, ketangkasan aiming, dan komunikasi tim untuk kompetisi PC FPS antar perguruan tinggi.
+                            </p>
+                        </div>
                     </article>
 
                     <article class="card">
-                        <div class="icon">💻</div>
-                        <h3>Divisi IT</h3>
-                        <p>
-                            Mengelola teknologi, website, dan kebutuhan
-                            digital organisasi.
-                        </p>
+                        <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80" alt="Divisi Mobile Gaming" class="card-img">
+                        <div class="card-body">
+                            <div class="icon">📱</div>
+                            <h3>Divisi MLBB (MOBA Mobile)</h3>
+                            <p>
+                                Wadah bagi player Mobile Legends untuk mengasah draft-pick, macro play, dan strategi liga kampus.
+                            </p>
+                        </div>
                     </article>
 
                     <article class="card">
-                        <div class="icon">📢</div>
-                        <h3>Divisi Humas</h3>
-                        <p>
-                            Bertanggung jawab terhadap publikasi,
-                            komunikasi, dan hubungan eksternal.
-                        </p>
+                        <img src="https://images.unsplash.com/photo-1561736778-92e52a7769ef?auto=format&fit=crop&w=600&q=80" alt="Divisi Caster & Streamer" class="card-img">
+                        <div class="card-body">
+                            <div class="icon">🎙️</div>
+                            <h3>Divisi Caster & Content Creator</h3>
+                            <p>
+                                Melatih bakat shoutcaster, OBS streaming operator, dan pembuat konten kreatif esports kampus.
+                            </p>
+                        </div>
                     </article>
 
                 </div>
 
             </div>
-
         </section>
 
 
         <!-- PROGRAM KERJA -->
         <section id="program" class="section section-light">
-
             <div class="container">
 
                 <div class="section-heading">
-                    <span class="tag">Program</span>
-                    <h2>Program Kerja</h2>
+                    <span class="tag">Agenda Esports</span>
+                    <h2>Program Kerja & Turnamen</h2>
                     <p>
-                        Pantau seluruh program kerja organisasi
-                        dalam satu tempat.
+                        Jadwal kejuaraan, coaching clinic, dan event utama UKM Esport.
                     </p>
                 </div>
 
                 <div class="card-grid">
 
                     <article class="card">
-                        <span class="status">Berjalan</span>
-
-                        <h3>Workshop Web Development</h3>
-
-                        <p>
-                            Pelatihan dasar pengembangan website
-                            untuk mahasiswa.
-                        </p>
-
-                        <p class="date">
-                            📅 25 September 2026
-                        </p>
+                        <img src="https://images.unsplash.com/photo-1511882150382-421056c89033?auto=format&fit=crop&w=600&q=80" alt="Turnamen Kampus" class="card-img">
+                        <div class="card-body">
+                            <span class="status status-running">Berjalan</span>
+                            <h3>Campus Esports Championship 2026</h3>
+                            <p>
+                                Turnamen terbesar antar fakultas melingkupi cabang game Valorant, Mobile Legends, dan PUBG Mobile.
+                            </p>
+                            <p class="date">📅 15 Oktober 2026</p>
+                        </div>
                     </article>
 
                     <article class="card">
-                        <span class="status">Direncanakan</span>
-
-                        <h3>Seminar Teknologi</h3>
-
-                        <p>
-                            Seminar mengenai perkembangan teknologi
-                            dan industri digital.
-                        </p>
-
-                        <p class="date">
-                            📅 10 Oktober 2026
-                        </p>
+                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80" alt="Coaching Clinic" class="card-img">
+                        <div class="card-body">
+                            <span class="status status-planned">Direncanakan</span>
+                            <h3>Esports Coaching Clinic & Bootcamp</h3>
+                            <p>
+                                Sesi pelatihan strategi game dan mental bertanding bersama mantan pro-player nasional.
+                            </p>
+                            <p class="date">📅 05 November 2026</p>
+                        </div>
                     </article>
 
                     <article class="card">
-                        <span class="status">Selesai</span>
-
-                        <h3>Pelatihan Kepemimpinan</h3>
-
-                        <p>
-                            Pelatihan pengembangan kemampuan
-                            kepemimpinan anggota.
-                        </p>
-
-                        <p class="date">
-                            📅 15 September 2026
-                        </p>
+                        <img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?auto=format&fit=crop&w=600&q=80" alt="Internal Scrim" class="card-img">
+                        <div class="card-body">
+                            <span class="status status-done">Selesai</span>
+                            <h3>Internal Scrim & Talent Scouting</h3>
+                            <p>
+                                Seleksi terbuka untuk penyaringan player berbakat yang akan masuk dalam Roster Utama UKM.
+                            </p>
+                            <p class="date">📅 20 September 2026</p>
+                        </div>
                     </article>
 
                 </div>
 
             </div>
-
         </section>
 
 
         <!-- KEGIATAN -->
         <section id="kegiatan" class="section">
-
             <div class="container">
 
                 <div class="section-heading">
-                    <span class="tag">Aktivitas</span>
-                    <h2>Kegiatan Organisasi</h2>
+                    <span class="tag">Aktivitas Rutin</span>
+                    <h2>Kegiatan & Sparring</h2>
                     <p>
-                        Informasi kegiatan dan agenda terbaru organisasi.
+                        Jadwal latihan tanding (scrimmage) dan workshop mingguan.
                     </p>
                 </div>
 
                 <div class="activity-list">
 
                     <article class="activity">
-
                         <div class="activity-date">
-                            <strong>24</strong>
-                            <span>SEP</span>
+                            <strong>02</strong>
+                            <span>OKT</span>
                         </div>
-
-                        <div>
-                            <h3>Rapat Koordinasi</h3>
+                        <div class="activity-info">
+                            <h3>Weekly Scrim: UKM Esport vs Universitas Tetangga</h3>
                             <p>
-                                Evaluasi program kerja dan persiapan
-                                kegiatan berikutnya.
+                                Latihan tanding persahabatan divisi Valorant dan MLBB untuk menguji chemistry tim.
                             </p>
                         </div>
-
                     </article>
 
-
                     <article class="activity">
-
                         <div class="activity-date">
-                            <strong>28</strong>
-                            <span>SEP</span>
+                            <strong>12</strong>
+                            <span>OKT</span>
                         </div>
-
-                        <div>
-                            <h3>Workshop Internal</h3>
+                        <div class="activity-info">
+                            <h3>Workshop Shoutcasting & Live Production</h3>
                             <p>
-                                Pelatihan untuk meningkatkan kemampuan
-                                anggota organisasi.
+                                Pelatihan dasar menjadi shoutcaster esports profesional dan penggunaan software streaming OBS.
                             </p>
                         </div>
-
                     </article>
 
                 </div>
 
             </div>
-
         </section>
 
 
         <!-- LAPORAN -->
         <section id="laporan" class="section section-light">
-
             <div class="container">
 
                 <div class="section-heading">
-                    <span class="tag">Dokumentasi</span>
-                    <h2>Laporan</h2>
+                    <span class="tag">Transparansi UKM</span>
+                    <h2>Laporan & Rekap Prestasi</h2>
                     <p>
-                        Informasi laporan kegiatan dan perkembangan organisasi.
+                        Dokumentasi pencapaian trophy, laporan kas, dan evaluasi pengurus.
                     </p>
                 </div>
 
                 <div class="report-box">
-
                     <div>
-                        <h3>Laporan Organisasi</h3>
-
+                        <h3>Laporan Kinerja & Prestasi Turnamen</h3>
                         <p>
-                            Dokumentasikan hasil kegiatan dan program kerja
-                            secara terstruktur agar mudah dievaluasi.
+                            Arsip resmi pencapaian juara tim kampus, laporan keuangan operasional, serta statistik per divisi.
                         </p>
                     </div>
-
                     <button type="button" class="button">
                         Lihat Laporan
                     </button>
-
                 </div>
 
             </div>
-
         </section>
 
     </main>
 
 
-    <!-- FOOTER -->
+    <!-- FOOTER LENGKAP -->
     <footer class="footer">
-
         <div class="container footer-content">
-
-            <div>
-                <h3>Organization Management System</h3>
-                <p>
-                    Platform pengelolaan organisasi mahasiswa.
-                </p>
+            <div class="footer-brand">
+                <h3>🎮 CYBER ESPORT UKM</h3>
+                <p>Wadah Resmi Pengembangan Potensi Esports & Gaming Mahasiswa Kampus.</p>
             </div>
-
-            <p>
-                &copy; 2026 Organization Management System
-            </p>
-
+            <div class="footer-links">
+                <h4>Navigasi Cepat</h4>
+                <a href="#beranda">Beranda</a>
+                <a href="#anggota">Divisi Game</a>
+                <a href="#program">Turnamen</a>
+                <a href="#kegiatan">Kegiatan</a>
+            </div>
+            <div class="footer-copy">
+                <p>&copy; 2026 Cyber Esports UKM. All rights reserved.</p>
+            </div>
         </div>
-
     </footer>
+
     <script src="script.js"></script>
 </body>
 
