@@ -335,80 +335,8 @@ a {
     font-weight: bold;
 }
 
-.activity-list {
-    max-width: 800px;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.activity {
-    display: flex;
-    align-items: center;
-    gap: 25px;
-    padding: 24px;
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
-    background-color: var(--bg-card);
-    transition: border-color 0.2s;
-}
-
-.activity:hover {
-    border-color: var(--accent-cyan);
-}
-
-.activity-date {
-    min-width: 75px;
-    padding: 12px;
-    border-radius: var(--radius-md);
-    background-color: var(--primary);
-    color: #ffffff;
-    text-align: center;
-    box-shadow: var(--shadow-glow);
-}
-
-.activity-date strong {
-    display: block;
-    font-size: 24px;
-}
-
-.activity-date span {
-    font-size: 12px;
-}
-
-.activity-info h3 {
-    font-size: 18px;
-    margin-bottom: 5px;
-    color: var(--text-white);
-}
-
-.activity-info p {
-    color: var(--text-muted);
-    font-size: 14px;
-}
-
-.report-box {
-    max-width: 850px;
-    margin: auto;
-    padding: 35px;
-    border-radius: var(--radius-lg);
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-color);
-    box-shadow: var(--shadow-md);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 30px;
-}
-
-.report-box p {
-    margin-top: 6px;
-    color: var(--text-muted);
-}
-
 /* =================================================================
-   5. MODAL LOGIN POP-UP
+   5. MODAL OVERLAY & POP-UP FORM
 ================================================================= */
 .modal-overlay {
     position: fixed;
@@ -437,7 +365,7 @@ a {
     border: 2px solid var(--primary);
     border-radius: var(--radius-lg);
     width: 90%;
-    max-width: 420px;
+    max-width: 440px;
     padding: 32px;
     position: relative;
     box-shadow: 0 0 35px rgba(139, 92, 246, 0.3);
@@ -469,12 +397,6 @@ a {
 .modal-header {
     text-align: center;
     margin-bottom: 20px;
-}
-
-.modal-logo {
-    font-size: 36px;
-    display: block;
-    margin-bottom: 6px;
 }
 
 .modal-header h2 {
@@ -543,30 +465,6 @@ a {
 
 .form-group input:focus {
     border-color: var(--accent-cyan);
-}
-
-.form-options {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 12px;
-    margin-bottom: 20px;
-    color: var(--text-muted);
-}
-
-.remember-me {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    cursor: pointer;
-}
-
-.forgot-pass {
-    color: var(--accent-cyan);
-}
-
-.forgot-pass:hover {
-    text-decoration: underline;
 }
 
 .login-message {
@@ -647,6 +545,11 @@ a {
     padding: 2px 8px;
     border-radius: 12px;
     margin-top: 4px;
+    background-color: var(--primary);
+}
+
+.role-ketua {
+    background-color: #ef4444;
 }
 
 .sidebar-nav {
@@ -706,6 +609,14 @@ a {
     margin-right: 6px;
 }
 
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -737,11 +648,18 @@ a {
     color: var(--text-muted);
 }
 
+.dashboard-grid-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
 .dashboard-card {
     background-color: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
     padding: 24px;
+    margin-bottom: 24px;
 }
 
 .card-header-flex {
@@ -751,34 +669,87 @@ a {
     margin-bottom: 20px;
 }
 
-.form-box-hidden {
-    display: none;
+/* TASK BOARD STYLES */
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
     background-color: #0f172a;
-    border: 1px solid var(--primary);
-    padding: 20px;
-    border-radius: var(--radius-md);
-    margin-bottom: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    gap: 12px;
 }
 
-.form-box-hidden.active {
+.task-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.task-item label {
+    flex: 1;
+    cursor: pointer;
+}
+
+.task-item label strong {
     display: block;
+    font-size: 14px;
+    color: var(--text-white);
 }
 
-.form-row {
+.task-meta {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.task-completed-text {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+/* FILTER & SEARCH BAR */
+.table-filter-bar {
     display: flex;
     gap: 12px;
-    margin-top: 12px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
 }
 
-.form-row input, .form-row select {
+.filter-input {
     flex: 1;
-    padding: 10px;
-    background-color: var(--bg-card);
+    min-width: 200px;
+    padding: 10px 14px;
+    background-color: #0f172a;
     border: 1px solid var(--border-color);
+    border-radius: 8px;
     color: var(--text-white);
-    border-radius: 6px;
+    font-size: 13px;
+    outline: none;
 }
 
+.filter-input:focus {
+    border-color: var(--accent-cyan);
+}
+
+.filter-select, .form-control-select {
+    padding: 10px 14px;
+    background-color: #0f172a;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-white);
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+}
+
+/* DATA TABLE STYLES */
 .table-responsive {
     overflow-x: auto;
 }
@@ -810,6 +781,7 @@ a {
 
 .game-tag.valorant { background-color: rgba(239, 68, 68, 0.2); color: #f87171; }
 .game-tag.mlbb { background-color: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+.game-tag.caster { background-color: rgba(168, 85, 247, 0.2); color: #c084fc; }
 
 .btn-action {
     background-color: transparent;
@@ -819,11 +791,22 @@ a {
     border-radius: 6px;
     font-size: 12px;
     cursor: pointer;
+    transition: all 0.2s;
 }
 
 .btn-action:hover {
     background-color: var(--accent-cyan);
     color: #000;
+}
+
+.btn-delete-row {
+    border-color: #ef4444 !important;
+    color: #f87171 !important;
+}
+
+.btn-delete-row:hover {
+    background-color: #ef4444 !important;
+    color: #ffffff !important;
 }
 
 /* =================================================================
@@ -911,6 +894,9 @@ a {
     .card-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+    .dashboard-grid-2col {
+        grid-template-columns: 1fr;
+    }
     .dashboard-body {
         flex-direction: column;
     }
@@ -927,16 +913,5 @@ a {
 @media (max-width: 600px) {
     .card-grid {
         grid-template-columns: 1fr;
-    }
-    .report-box {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .activity {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .form-row {
-        flex-direction: column;
     }
 }

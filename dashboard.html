@@ -73,7 +73,7 @@
                 <div class="stat-card">
                     <span class="stat-icon">📌</span>
                     <div>
-                        <h3>6 Proker</h3>
+                        <h3 id="stat-total-proker">6 Proker</h3>
                         <p>Program Kerja Aktif</p>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                 <div class="dashboard-card">
                     <div class="card-header-flex">
                         <h3>📌 Penugasan Kepanitiaan Aktif</h3>
-                        <button class="button btn-sm" id="btn-quick-task">+ Buat Tugas Baru</button>
+                        <button class="button btn-sm" id="btn-open-task-modal">+ Buat Tugas Baru</button>
                     </div>
                     <div class="task-list" id="task-list-container">
                         <div class="task-item">
@@ -114,7 +114,7 @@
                         </div>
                         <div class="task-item">
                             <input type="checkbox" id="task3" checked>
-                            <label for="task3">
+                            <label for="task3" class="task-completed-text">
                                 <strong>Pengajuan Proposal Dana Rektorat</strong>
                                 <span class="task-meta">Internal UKM • PIC: Bendahara</span>
                             </label>
@@ -169,11 +169,22 @@
                         <h3>Pengelolaan Anggota & Struktur Divisi</h3>
                         <p class="text-muted">Kelola data seluruh pengurus, divisi game, dan status keanggotaan.</p>
                     </div>
-                    <button class="button btn-sm" id="add-member-btn">+ Tambah Anggota Baru</button>
+                    <button class="button btn-sm" id="btn-open-member-modal">+ Tambah Anggota Baru</button>
+                </div>
+
+                <!-- FILTER & SEARCH BAR -->
+                <div class="table-filter-bar">
+                    <input type="text" id="search-member-input" placeholder="🔍 Cari Nama / NIM Anggota..." class="filter-input">
+                    <select id="filter-division-select" class="filter-select">
+                        <option value="all">Semua Divisi</option>
+                        <option value="Valorant">Divisi Valorant</option>
+                        <option value="Mobile Legends">Divisi Mobile Legends</option>
+                        <option value="Caster">Divisi Caster & Stream</option>
+                    </select>
                 </div>
 
                 <div class="table-responsive">
-                    <table class="data-table">
+                    <table class="data-table" id="member-table">
                         <thead>
                             <tr>
                                 <th>NIM</th>
@@ -189,21 +200,27 @@
                                 <td><strong>Reynaldi Pratama</strong></td>
                                 <td><span class="game-tag valorant">Divisi Valorant</span></td>
                                 <td>Kapten Tim Principal</td>
-                                <td><button class="btn-action">Edit Role</button></td>
+                                <td>
+                                    <button class="btn-action btn-delete-row">Hapus</button>
+                                </td>
                             </tr>
                             <tr>
                                 <td>230101012</td>
                                 <td><strong>Nabila Putri</strong></td>
                                 <td><span class="game-tag mlbb">Divisi Mobile Legends</span></td>
                                 <td>Koordinator Event</td>
-                                <td><button class="btn-action">Edit Role</button></td>
+                                <td>
+                                    <button class="btn-action btn-delete-row">Hapus</button>
+                                </td>
                             </tr>
                             <tr>
                                 <td>230101045</td>
                                 <td><strong>Farhan Rizky</strong></td>
                                 <td><span class="game-tag caster">Divisi Caster & Stream</span></td>
                                 <td>Anggota Aktif</td>
-                                <td><button class="btn-action">Edit Role</button></td>
+                                <td>
+                                    <button class="btn-action btn-delete-row">Hapus</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -219,10 +236,10 @@
                         <h3>Manajemen Program Kerja (Proker) & Kegiatan</h3>
                         <p class="text-muted">Status progres dan jadwal pelaksanaan agenda UKM.</p>
                     </div>
-                    <button class="button btn-sm">+ Tambah Proker</button>
+                    <button class="button btn-sm" id="btn-open-proker-modal">+ Tambah Proker</button>
                 </div>
 
-                <div class="card-grid">
+                <div class="card-grid" id="proker-grid-container">
                     <article class="card">
                         <div class="card-body">
                             <span class="status status-running">Sedang Berjalan</span>
@@ -256,10 +273,15 @@
         <!-- MODUL KEPANITIAAN & TUGAS -->
         <section id="panitia-section" class="tab-content">
             <div class="dashboard-card">
-                <h3>🎪 Delegasi Kepanitiaan & Board Tugas</h3>
-                <p class="text-muted">Delegasikan tugas dari Ketua Umum ke tiap divisi panitia.</p>
-                <br>
-                <div class="task-list">
+                <div class="card-header-flex">
+                    <div>
+                        <h3>🎪 Delegasi Kepanitiaan & Board Tugas</h3>
+                        <p class="text-muted">Delegasikan tugas dari Ketua Umum ke tiap divisi panitia.</p>
+                    </div>
+                    <button class="button btn-sm" id="btn-open-task-modal-2">+ Buat Tugas Baru</button>
+                </div>
+                
+                <div class="task-list" id="panitia-task-list">
                     <div class="task-item">
                         <input type="checkbox" id="pt1">
                         <label for="pt1">
@@ -270,7 +292,7 @@
                     </div>
                     <div class="task-item">
                         <input type="checkbox" id="pt2" checked>
-                        <label for="pt2">
+                        <label for="pt2" class="task-completed-text">
                             <strong>Koordinasi Humas ke BEM Kampus</strong>
                             <span class="task-meta">Campus Championship • PIC: Divisi Humas</span>
                         </label>
@@ -288,7 +310,7 @@
                         <h3>📝 Rekap Absensi Digital Kegiatan</h3>
                         <p class="text-muted">Pencatatan kehadiran rapat, latihan rutin (scrim), dan event.</p>
                     </div>
-                    <button class="button btn-sm" onclick="alert('Form Absensi Digital Dibuat!')">+ Buat Sesi Absensi Baru</button>
+                    <button class="button btn-sm" id="btn-open-absensi-modal">+ Buat Sesi Absensi Baru</button>
                 </div>
 
                 <div class="table-responsive">
@@ -302,7 +324,7 @@
                                 <th>Aksi</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="absensi-table-body">
                             <tr>
                                 <td>02 Okt 2026</td>
                                 <td>Rapat Pleno Evaluasi Proker</td>
@@ -324,6 +346,126 @@
         </section>
 
     </main>
+
+    <!-- MODAL 1: TAMBAH ANGGOTA -->
+    <div class="modal-overlay" id="modal-add-member">
+        <div class="modal-content">
+            <button class="modal-close" class="modal-close-btn">&times;</button>
+            <div class="modal-header">
+                <h2>👥 Tambah Anggota Baru</h2>
+                <p>Mendaftarkan anggota/pengurus baru ke database</p>
+            </div>
+            <form id="form-add-member">
+                <div class="form-group">
+                    <label for="input-nim">NIM Mahasiswa</label>
+                    <input type="text" id="input-nim" placeholder="Contoh: 230101099" required>
+                </div>
+                <div class="form-group">
+                    <label for="input-nama">Nama Lengkap</label>
+                    <input type="text" id="input-nama" placeholder="Contoh: Budi Santoso" required>
+                </div>
+                <div class="form-group">
+                    <label for="select-divisi">Divisi Game / Unit</label>
+                    <select id="select-divisi" class="form-control-select">
+                        <option value="Valorant">Divisi Valorant</option>
+                        <option value="Mobile Legends">Divisi Mobile Legends</option>
+                        <option value="Caster">Divisi Caster & Stream</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="input-jabatan">Jabatan / Role</label>
+                    <input type="text" id="input-jabatan" placeholder="Contoh: Anggota Aktif / Analyst" required>
+                </div>
+                <button type="submit" class="button button-full">Simpan Anggota</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 2: BUAT TUGAS BARU -->
+    <div class="modal-overlay" id="modal-add-task">
+        <div class="modal-content">
+            <button class="modal-close" class="modal-close-btn">&times;</button>
+            <div class="modal-header">
+                <h2>📌 Delegasi Tugas Panitia</h2>
+                <p>Buat instruksi baru untuk kepanitiaan/divisi</p>
+            </div>
+            <form id="form-add-task">
+                <div class="form-group">
+                    <label for="input-task-title">Judul Tugas / Instruksi</label>
+                    <input type="text" id="input-task-title" placeholder="Contoh: Penyusunan Layout Stage" required>
+                </div>
+                <div class="form-group">
+                    <label for="input-task-event">Nama Event / Kegiatan</label>
+                    <input type="text" id="input-task-event" placeholder="Contoh: Campus Championship 2026" required>
+                </div>
+                <div class="form-group">
+                    <label for="input-task-pic">PIC / Divisi Penanggung Jawab</label>
+                    <input type="text" id="input-task-pic" placeholder="Contoh: Divisi Event / Perkap" required>
+                </div>
+                <button type="submit" class="button button-full">Delegasikan Tugas</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 3: TAMBAH PROKER -->
+    <div class="modal-overlay" id="modal-add-proker">
+        <div class="modal-content">
+            <button class="modal-close" class="modal-close-btn">&times;</button>
+            <div class="modal-header">
+                <h2>🎯 Tambah Program Kerja</h2>
+                <p>Masukkan agenda atau program kerja baru UKM</p>
+            </div>
+            <form id="form-add-proker">
+                <div class="form-group">
+                    <label for="input-proker-title">Nama Program Kerja</label>
+                    <input type="text" id="input-proker-title" placeholder="Contoh: Esport National League 2026" required>
+                </div>
+                <div class="form-group">
+                    <label for="input-proker-desc">Deskripsi Singkat</label>
+                    <input type="text" id="input-proker-desc" placeholder="Penjelasan singkat proker..." required>
+                </div>
+                <div class="form-group">
+                    <label for="select-proker-status">Status Proker</label>
+                    <select id="select-proker-status" class="form-control-select">
+                        <option value="Perencanaan">Perencanaan</option>
+                        <option value="Sedang Berjalan">Sedang Berjalan</option>
+                        <option value="Terlaksana">Terlaksana</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="input-proker-date">Target Tanggal Selesai</label>
+                    <input type="text" id="input-proker-date" placeholder="Contoh: 20 November 2026" required>
+                </div>
+                <button type="submit" class="button button-full">Simpan Proker</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 4: BUAT SESI ABSENSI -->
+    <div class="modal-overlay" id="modal-add-absensi">
+        <div class="modal-content">
+            <button class="modal-close" class="modal-close-btn">&times;</button>
+            <div class="modal-header">
+                <h2>📝 Buat Sesi Absensi Baru</h2>
+                <p>Buka sesi presensi digital untuk kegiatan UKM</p>
+            </div>
+            <form id="form-add-absensi">
+                <div class="form-group">
+                    <label for="input-absensi-date">Tanggal Kegiatan</label>
+                    <input type="text" id="input-absensi-date" placeholder="Contoh: 05 Okt 2026" required>
+                </div>
+                <div class="form-group">
+                    <label for="input-absensi-event">Nama Agenda / Rapat</label>
+                    <input type="text" id="input-absensi-event" placeholder="Contoh: Rapat Koordinasi Grand Final" required>
+                </div>
+                <div class="form-group">
+                    <label for="input-absensi-target">Target Peserta</label>
+                    <input type="text" id="input-absensi-target" placeholder="Contoh: 35 Pengurus" required>
+                </div>
+                <button type="submit" class="button button-full">Buka Sesi Presensi</button>
+            </form>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

@@ -1,6 +1,6 @@
 // =================================================================
 // UKM ESPORT MANAGEMENT SYSTEM - UNIFIED SCRIPT.JS
-// Mengelola Landing Page (index.html) & Dashboard Panel (dashboard.html)
+// Mengelola Landing Page (index.html) & Dashboard Ketua Umum (dashboard.html)
 // =================================================================
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -9,15 +9,15 @@ document.addEventListener("DOMContentLoaded", function () {
     // 1. LOGIKA LANDING PAGE & INTERAKSI PUBLIK (index.html)
     // =============================================================
 
-    // Change Content Secara Dinamis
+    // Penyesuaian Teks Dinamis Hero Section
     const heroTag = document.querySelector(".hero-text .tag");
     if (heroTag) {
-        heroTag.textContent = "Unit Kegiatan Mahasiswa Esports Kampus";
+        heroTag.textContent = "Platform Integrasi Organisasi UKM Esports";
     }
 
     const heroTitle = document.querySelector(".hero-text h1");
     if (heroTitle) {
-        heroTitle.innerHTML = "Wadah Bakat & Prestasi Gaming <span>Mahasiswa</span>";
+        heroTitle.innerHTML = "Satu Wadah Terintegrasi untuk <span>Kelola Organisasi</span>";
     }
 
     const anggotaSubheading = document.querySelector("#anggota .section-heading p");
@@ -25,25 +25,19 @@ document.addEventListener("DOMContentLoaded", function () {
         anggotaSubheading.textContent = "Pusat informasi divisi game kompetitif, daftar pro player, serta talent pendukung UKM.";
     }
 
-    // Interactive Button Events
+    // Hero Button Click Event
     const heroButton = document.querySelector(".hero-text .button");
     if (heroButton) {
         heroButton.addEventListener("click", function () {
             const originalText = heroButton.textContent;
-            heroButton.textContent = "Memuat Turnamen...";
+            heroButton.textContent = "Memuat Sistem...";
             setTimeout(() => {
                 heroButton.textContent = originalText;
-            }, 1200);
+            }, 1000);
         });
     }
 
-    const reportButton = document.querySelector("#laporan .button");
-    if (reportButton) {
-        reportButton.addEventListener("click", function () {
-            alert("🏆 Laporan Prestasi Turnamen & Kas UKM Esport siap diunduh!");
-        });
-    }
-
+    // Nav Menu Active State
     const navLinks = document.querySelectorAll(".nav-menu a");
     navLinks.forEach(link => {
         link.addEventListener("click", function () {
@@ -52,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Program Cards Click Event (Detail Box Interaktif)
+    // Detail Panel Interaktif Card Program
     const programCards = document.querySelectorAll("#program .card");
     const programContainer = document.querySelector("#program .container");
 
@@ -119,16 +113,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const loginForm = document.getElementById("login-form");
     const loginMessage = document.getElementById("login-message");
 
-    let currentRole = "player"; // Default Role Login
+    let currentRole = "ketua";
 
-    // Buka Modal Login
     if (openLoginBtn && loginModal) {
         openLoginBtn.addEventListener("click", function () {
             loginModal.classList.add("active");
         });
     }
 
-    // Tutup Modal lewat Tombol X
     if (closeLoginBtn && loginModal) {
         closeLoginBtn.addEventListener("click", function () {
             loginModal.classList.remove("active");
@@ -136,7 +128,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Tutup Modal jika Klik Latar Belakang Gelap
     if (loginModal) {
         loginModal.addEventListener("click", function (e) {
             if (e.target === loginModal) {
@@ -146,7 +137,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Tutup Modal dengan Tombol Escape (Esc)
     document.addEventListener("keydown", function (e) {
         if (e.key === "Escape" && loginModal && loginModal.classList.contains("active")) {
             loginModal.classList.remove("active");
@@ -154,7 +144,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Switch Role (Player vs Pengurus)
     if (roleBtns.length > 0) {
         roleBtns.forEach(btn => {
             btn.addEventListener("click", function () {
@@ -163,116 +152,325 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 currentRole = this.getAttribute("data-role");
 
-                if (currentRole === "pengurus") {
-                    if (labelId) labelId.textContent = "NIM / ID Pengurus";
-                    if (loginIdInput) loginIdInput.placeholder = "Contoh: 230101009";
+                if (currentRole === "ketua") {
+                    if (labelId) labelId.textContent = "NIM / ID Ketua Umum";
+                    if (loginIdInput) loginIdInput.placeholder = "Contoh: 230101001";
                 } else {
-                    if (labelId) labelId.textContent = "Game ID / Nickname";
-                    if (loginIdInput) loginIdInput.placeholder = "Contoh: RadiantPlayer#1234";
+                    if (labelId) labelId.textContent = "NIM / Game ID Anggota";
+                    if (loginIdInput) loginIdInput.placeholder = "Contoh: 230101012 / Player#1234";
                 }
             });
         });
     }
 
-    // Submit Login Form -> Redirect ke dashboard.html
     if (loginForm) {
         loginForm.addEventListener("submit", function (e) {
             e.preventDefault();
-
-            const username = loginIdInput.value.trim();
+            const username = loginIdInput ? loginIdInput.value.trim() : "";
 
             if (username !== "") {
-                loginMessage.className = "login-message success";
-                loginMessage.textContent = `✅ Login Berhasil! Mengalihkan ke Dashboard...`;
+                if (loginMessage) {
+                    loginMessage.className = "login-message success";
+                    loginMessage.textContent = "✅ Akses Diterima! Membuka Portal Ketua Umum...";
+                }
 
                 setTimeout(() => {
-                    loginModal.classList.remove("active");
+                    if (loginModal) loginModal.classList.remove("active");
                     loginForm.reset();
-                    // Mengarahkan ke dashboard.html membawa data user & role
                     window.location.href = `dashboard.html?role=${currentRole}&user=${encodeURIComponent(username)}`;
-                }, 1200);
+                }, 1000);
             } else {
-                loginMessage.className = "login-message error";
-                loginMessage.textContent = "❌ Harap masukkan Game ID / NIM Anda.";
+                if (loginMessage) {
+                    loginMessage.className = "login-message error";
+                    loginMessage.textContent = "❌ Masukkan ID / NIM Anda terlebih dahulu.";
+                }
             }
         });
     }
 
     // =============================================================
-    // 3. LOGIKA DASHBOARD PANEL (dashboard.html)
+    // 3. LOGIKA DASHBOARD KETUA UMUM (dashboard.html)
     // =============================================================
 
     const userDisplayName = document.getElementById("user-display-name");
     const userDisplayRole = document.getElementById("user-display-role");
-    const addScrimBtn = document.getElementById("add-scrim-btn");
-    const scrimFormBox = document.getElementById("scrim-form-box");
-    const cancelScrimBtn = document.getElementById("cancel-scrim-btn");
-    const scrimForm = document.getElementById("scrim-form");
-    const scrimTableBody = document.getElementById("scrim-table-body");
+    const navItems = document.querySelectorAll(".sidebar-nav .nav-item");
+    const tabContents = document.querySelectorAll(".tab-content");
 
-    // Mengecek apakah browser sedang berada di halaman dashboard.html
     if (userDisplayName && userDisplayRole) {
-        // Ambil Data dari URL Query Parameters
         const urlParams = new URLSearchParams(window.location.search);
-        const userParam = urlParams.get('user') || 'Member Esport';
-        const roleParam = urlParams.get('role') || 'player';
+        const userParam = urlParams.get('user') || 'Ketua Umum';
+        const roleParam = urlParams.get('role') || 'ketua';
 
-        // Tampilkan Nama & Role di Profil Sidebar
         userDisplayName.textContent = userParam;
 
-        if (roleParam === "pengurus") {
-            userDisplayRole.textContent = "Role: Pengurus UKM";
-            userDisplayRole.style.backgroundColor = "#8b5cf6";
-            if (addScrimBtn) addScrimBtn.style.display = "inline-block";
+        if (roleParam === "ketua" || userParam.includes("Ketua")) {
+            userDisplayRole.textContent = "Role: Ketua Umum";
+            userDisplayRole.className = "role-badge role-ketua";
         } else {
-            userDisplayRole.textContent = "Role: Pro Player";
+            userDisplayRole.textContent = "Role: Pengurus / Anggota";
+            userDisplayRole.className = "role-badge";
             userDisplayRole.style.backgroundColor = "#06b6d4";
-            // Sembunyikan Tombol Tambah jika pengguna adalah Player biasa
-            if (addScrimBtn) addScrimBtn.style.display = "none";
         }
 
-        // Toggle Form Tambah Scrim
-        if (addScrimBtn) {
-            addScrimBtn.addEventListener("click", function () {
-                scrimFormBox.classList.toggle("active");
-            });
-        }
-
-        if (cancelScrimBtn) {
-            cancelScrimBtn.addEventListener("click", function () {
-                scrimFormBox.classList.remove("active");
-            });
-        }
-
-        // Penambahan Scrim Baru ke Tabel
-        if (scrimForm && scrimTableBody) {
-            scrimForm.addEventListener("submit", function (e) {
+        // Navigasi Tab Sidebar
+        navItems.forEach(item => {
+            item.addEventListener("click", function (e) {
                 e.preventDefault();
+                navItems.forEach(nav => nav.classList.remove("active"));
+                this.classList.add("active");
 
-                const opponent = document.getElementById("scrim-opponent").value.trim();
-                const game = document.getElementById("scrim-game").value;
-                const date = document.getElementById("scrim-date").value;
-                const time = document.getElementById("scrim-time").value;
+                const targetTab = this.getAttribute("data-tab");
+                tabContents.forEach(content => {
+                    content.classList.remove("active");
+                    if (content.id === `${targetTab}-section`) {
+                        content.classList.add("active");
+                    }
+                });
+            });
+        });
+    }
 
-                if (opponent && game && date && time) {
-                    const tr = document.createElement("tr");
-                    const gameClass = game.toLowerCase().includes("valorant") ? "valorant" : "mlbb";
+    // Helper Fungsi Buka/Tutup Modal Pop-Up
+    function setupModal(triggerBtnId, modalId) {
+        const btn = document.getElementById(triggerBtnId);
+        const modal = document.getElementById(modalId);
+        if (!btn || !modal) return;
 
-                    tr.innerHTML = `
-                        <td><span class="game-tag ${gameClass}">${game}</span></td>
-                        <td>VS ${opponent}</td>
-                        <td>${date}, ${time} WIB</td>
-                        <td><span class="status status-planned">Direncanakan</span></td>
-                        <td><button class="btn-action">Detail Strategy</button></td>
-                    `;
+        const closeBtn = modal.querySelector(".modal-close");
 
-                    scrimTableBody.prepend(tr);
-                    scrimForm.reset();
-                    scrimFormBox.classList.remove("active");
-                    alert("✅ Jadwal Scrim Baru Berhasil Ditambahkan!");
-                }
+        btn.addEventListener("click", function () {
+            modal.classList.add("active");
+        });
+
+        if (closeBtn) {
+            closeBtn.addEventListener("click", function () {
+                modal.classList.remove("active");
             });
         }
+
+        modal.addEventListener("click", function (e) {
+            if (e.target === modal) {
+                modal.classList.remove("active");
+            }
+        });
     }
+
+    // Inisialisasi Modal
+    setupModal("btn-open-member-modal", "modal-add-member");
+    setupModal("btn-open-task-modal", "modal-add-task");
+    setupModal("btn-open-task-modal-2", "modal-add-task");
+    setupModal("btn-open-proker-modal", "modal-add-proker");
+    setupModal("btn-open-absensi-modal", "modal-add-absensi");
+
+    // Close Modal via ESC Key
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+            document.querySelectorAll(".modal-overlay.active").forEach(m => m.classList.remove("active"));
+        }
+    });
+
+    // Checkbox Task Interactive Status Toggle
+    document.body.addEventListener("change", function (e) {
+        if (e.target && e.target.type === "checkbox" && e.target.closest(".task-item")) {
+            const taskItem = e.target.closest(".task-item");
+            const label = taskItem.querySelector("label");
+            const statusBadge = taskItem.querySelector(".status");
+
+            if (e.target.checked) {
+                if (label) label.classList.add("task-completed-text");
+                if (statusBadge) {
+                    statusBadge.className = "status status-done";
+                    statusBadge.textContent = "Selesai";
+                }
+            } else {
+                if (label) label.classList.remove("task-completed-text");
+                if (statusBadge) {
+                    statusBadge.className = "status status-running";
+                    statusBadge.textContent = "In Progress";
+                }
+            }
+        }
+    });
+
+    // A. Submit Tambah Anggota Baru
+    const formAddMember = document.getElementById("form-add-member");
+    const memberTableBody = document.getElementById("member-table-body");
+    const statTotalAnggota = document.getElementById("stat-total-anggota");
+
+    if (formAddMember && memberTableBody) {
+        formAddMember.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const nim = document.getElementById("input-nim").value;
+            const nama = document.getElementById("input-nama").value;
+            const divisi = document.getElementById("select-divisi").value;
+            const jabatan = document.getElementById("input-jabatan").value;
+
+            let tagClass = "valorant";
+            if (divisi.includes("Legends")) tagClass = "mlbb";
+            if (divisi.includes("Caster")) tagClass = "caster";
+
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                <td>${nim}</td>
+                <td><strong>${nama}</strong></td>
+                <td><span class="game-tag ${tagClass}">Divisi ${divisi}</span></td>
+                <td>${jabatan}</td>
+                <td><button class="btn-action btn-delete-row">Hapus</button></td>
+            `;
+
+            memberTableBody.prepend(tr);
+
+            if (statTotalAnggota) {
+                let current = parseInt(statTotalAnggota.textContent) || 68;
+                statTotalAnggota.textContent = `${current + 1} Anggota`;
+            }
+
+            formAddMember.reset();
+            document.getElementById("modal-add-member").classList.remove("active");
+        });
+    }
+
+    // B. Submit Buat Tugas Baru
+    const formAddTask = document.getElementById("form-add-task");
+    const taskListContainer = document.getElementById("task-list-container");
+    const panitiaTaskList = document.getElementById("panitia-task-list");
+
+    if (formAddTask) {
+        formAddTask.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const title = document.getElementById("input-task-title").value;
+            const eventName = document.getElementById("input-task-event").value;
+            const pic = document.getElementById("input-task-pic").value;
+
+            const taskId = 'task_' + Date.now();
+            const newTaskHTML = `
+                <div class="task-item">
+                    <input type="checkbox" id="${taskId}">
+                    <label for="${taskId}">
+                        <strong>${title}</strong>
+                        <span class="task-meta">${eventName} • PIC: ${pic}</span>
+                    </label>
+                    <span class="status status-running">In Progress</span>
+                </div>
+            `;
+
+            if (taskListContainer) taskListContainer.insertAdjacentHTML('afterbegin', newTaskHTML);
+            if (panitiaTaskList) panitiaTaskList.insertAdjacentHTML('afterbegin', newTaskHTML);
+
+            formAddTask.reset();
+            document.getElementById("modal-add-task").classList.remove("active");
+        });
+    }
+
+    // C. Submit Tambah Proker Baru
+    const formAddProker = document.getElementById("form-add-proker");
+    const prokerGridContainer = document.getElementById("proker-grid-container");
+    const statTotalProker = document.getElementById("stat-total-proker");
+
+    if (formAddProker && prokerGridContainer) {
+        formAddProker.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const title = document.getElementById("input-proker-title").value;
+            const desc = document.getElementById("input-proker-desc").value;
+            const status = document.getElementById("select-proker-status").value;
+            const date = document.getElementById("input-proker-date").value;
+
+            let statusClass = "status-planned";
+            if (status === "Sedang Berjalan") statusClass = "status-running";
+            if (status === "Terlaksana") statusClass = "status-done";
+
+            const cardHTML = `
+                <article class="card">
+                    <div class="card-body">
+                        <span class="status ${statusClass}">${status}</span>
+                        <h3>${title}</h3>
+                        <p>${desc}</p>
+                        <p class="date">📅 Target Selesai: ${date}</p>
+                    </div>
+                </article>
+            `;
+
+            prokerGridContainer.insertAdjacentHTML('afterbegin', cardHTML);
+
+            if (statTotalProker) {
+                let current = parseInt(statTotalProker.textContent) || 6;
+                statTotalProker.textContent = `${current + 1} Proker`;
+            }
+
+            formAddProker.reset();
+            document.getElementById("modal-add-proker").classList.remove("active");
+        });
+    }
+
+    // D. Submit Sesi Absensi Baru
+    const formAddAbsensi = document.getElementById("form-add-absensi");
+    const absensiTableBody = document.getElementById("absensi-table-body");
+
+    if (formAddAbsensi && absensiTableBody) {
+        formAddAbsensi.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const date = document.getElementById("input-absensi-date").value;
+            const eventName = document.getElementById("input-absensi-event").value;
+            const target = document.getElementById("input-absensi-target").value;
+
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                <td>${date}</td>
+                <td>${eventName}</td>
+                <td>0 / ${target}</td>
+                <td><strong style="color:#facc15;">0% (Berlangsung)</strong></td>
+                <td><button class="btn-action">Unduh Rekap PDF</button></td>
+            `;
+
+            absensiTableBody.prepend(tr);
+            formAddAbsensi.reset();
+            document.getElementById("modal-add-absensi").classList.remove("active");
+        });
+    }
+
+    // Live Search & Filter Anggota
+    const searchInput = document.getElementById("search-member-input");
+    const divisionSelect = document.getElementById("filter-division-select");
+
+    function filterMembers() {
+        const query = searchInput ? searchInput.value.toLowerCase() : "";
+        const division = divisionSelect ? divisionSelect.value : "all";
+        const rows = document.querySelectorAll("#member-table-body tr");
+
+        rows.forEach(row => {
+            const nimText = row.children[0] ? row.children[0].textContent.toLowerCase() : "";
+            const nameText = row.children[1] ? row.children[1].textContent.toLowerCase() : "";
+            const divisionText = row.children[2] ? row.children[2].textContent : "";
+
+            const matchesQuery = nimText.includes(query) || nameText.includes(query);
+            const matchesDivision = (division === "all") || divisionText.includes(division);
+
+            if (matchesQuery && matchesDivision) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    }
+
+    if (searchInput) searchInput.addEventListener("keyup", filterMembers);
+    if (divisionSelect) divisionSelect.addEventListener("change", filterMembers);
+
+    // Delesi Baris Tabel
+    document.body.addEventListener("click", function (e) {
+        if (e.target && e.target.classList.contains("btn-delete-row")) {
+            if (confirm("Apakah Anda yakin ingin menghapus data ini?")) {
+                const row = e.target.closest("tr");
+                if (row) {
+                    row.remove();
+                    if (statTotalAnggota) {
+                        let current = parseInt(statTotalAnggota.textContent) || 68;
+                        if (current > 0) statTotalAnggota.textContent = `${current - 1} Anggota`;
+                    }
+                }
+            }
+        }
+    });
 
 });
