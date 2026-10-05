@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Ketua Umum - Platform Integrasi UKM Esport</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="dashboard-body">
+
+    <!-- DASHBOARD SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <span class="logo-icon">🎮</span> ESPORT HUB
+        </div>
+
+        <div class="user-profile-card">
+            <div class="avatar" id="user-avatar">👑</div>
+            <div class="user-info">
+                <h4 id="user-display-name">Ketua Umum UKM</h4>
+                <span id="user-display-role" class="role-badge role-ketua">Role: Ketua Umum</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="#overview" class="nav-item active" data-tab="overview">📊 Ringkasan Eksekutif</a>
+            <a href="#anggota" class="nav-item" data-tab="anggota">👥 Anggota & Divisi</a>
+            <a href="#proker" class="nav-item" data-tab="proker">🎯 Proker & Kegiatan</a>
+            <a href="#panitia" class="nav-item" data-tab="panitia">🎪 Kepanitiaan & Tugas</a>
+            <a href="#absensi" class="nav-item" data-tab="absensi">📝 Rekap Absensi</a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="index.html" class="button button-outline btn-sm button-full logout-btn">🚪 Keluar Portal</a>
+        </div>
+    </aside>
+
+    <!-- DASHBOARD MAIN CONTENT -->
+    <main class="dashboard-main">
+
+        <!-- TOPBAR -->
+        <header class="dashboard-topbar">
+            <div>
+                <h2>Pusat Kendali Organisasi UKM</h2>
+                <p class="text-muted">Pantau seluruh aktivitas, anggota, dan tugas organisasi dalam satu tempat.</p>
+            </div>
+            <div class="topbar-status">
+                <span class="status-indicator"></span> Mode Akses: <strong>Ketua Umum (Full Access)</strong>
+            </div>
+        </header>
+
+        <!-- RINGKASAN STATISTIK UTAMA -->
+        <section id="overview-section" class="tab-content active">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-icon">👥</span>
+                    <div>
+                        <h3 id="stat-total-anggota">68 Anggota</h3>
+                        <p>Total Anggota & Pengurus</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-icon">🎯</span>
+                    <div>
+                        <h3>4 Divisi</h3>
+                        <p>Valorant, MLBB, Caster, Media</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-icon">📌</span>
+                    <div>
+                        <h3>6 Proker</h3>
+                        <p>Program Kerja Aktif</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-icon">📝</span>
+                    <div>
+                        <h3>94.5%</h3>
+                        <p>Rata-rata Kehadiran</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODUL TUGAS & KEPANITIAAN CEPAT -->
+            <div class="dashboard-grid-2col">
+                <!-- PANEL MONITORING TUGAS -->
+                <div class="dashboard-card">
+                    <div class="card-header-flex">
+                        <h3>📌 Penugasan Kepanitiaan Aktif</h3>
+                        <button class="button btn-sm" id="btn-quick-task">+ Buat Tugas Baru</button>
+                    </div>
+                    <div class="task-list" id="task-list-container">
+                        <div class="task-item">
+                            <input type="checkbox" id="task1">
+                            <label for="task1">
+                                <strong>Finalisasi Vendor Stage Tournament</strong>
+                                <span class="task-meta">Panitia Campus Esports 2026 • PIC: Divisi Event</span>
+                            </label>
+                            <span class="status status-running">In Progress</span>
+                        </div>
+                        <div class="task-item">
+                            <input type="checkbox" id="task2">
+                            <label for="task2">
+                                <strong>Penerbitan SK Pengurus & Roster Official</strong>
+                                <span class="task-meta">Internal UKM • PIC: Sekretaris</span>
+                            </label>
+                            <span class="status status-planned">Pending Review</span>
+                        </div>
+                        <div class="task-item">
+                            <input type="checkbox" id="task3" checked>
+                            <label for="task3">
+                                <strong>Pengajuan Proposal Dana Rektorat</strong>
+                                <span class="task-meta">Internal UKM • PIC: Bendahara</span>
+                            </label>
+                            <span class="status status-done">Selesai</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PANEL ABSENSI TERAKHIR -->
+                <div class="dashboard-card">
+                    <div class="card-header-flex">
+                        <h3>📝 Kehadiran Kegiatan Terakhir</h3>
+                        <span class="tag">Rapat Rutin Pengurus</span>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Nama / Divisi</th>
+                                    <th>Jabatan / Role</th>
+                                    <th>Status Absen</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Alex Bima</strong></td>
+                                    <td>Ketua Divisi MLBB</td>
+                                    <td><span class="status status-running">Hadir (Tepat Waktu)</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Siti Rahma</strong></td>
+                                    <td>Sekretaris Umum</td>
+                                    <td><span class="status status-running">Hadir (Tepat Waktu)</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Dedi Kurnia</strong></td>
+                                    <td>Anggota Divisi Caster</td>
+                                    <td><span class="status status-planned">Izin (Sakit)</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODUL MANAGEMENT ANGGOTA & DIVISI -->
+        <section id="anggota-section" class="tab-content">
+            <div class="dashboard-card">
+                <div class="card-header-flex">
+                    <div>
+                        <h3>Pengelolaan Anggota & Struktur Divisi</h3>
+                        <p class="text-muted">Kelola data seluruh pengurus, divisi game, dan status keanggotaan.</p>
+                    </div>
+                    <button class="button btn-sm" id="add-member-btn">+ Tambah Anggota Baru</button>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>NIM</th>
+                                <th>Nama Lengkap</th>
+                                <th>Divisi</th>
+                                <th>Jabatan / Status</th>
+                                <th>Aksi Ketua</th>
+                            </tr>
+                        </thead>
+                        <tbody id="member-table-body">
+                            <tr>
+                                <td>230101001</td>
+                                <td><strong>Reynaldi Pratama</strong></td>
+                                <td><span class="game-tag valorant">Divisi Valorant</span></td>
+                                <td>Kapten Tim Principal</td>
+                                <td><button class="btn-action">Edit Role</button></td>
+                            </tr>
+                            <tr>
+                                <td>230101012</td>
+                                <td><strong>Nabila Putri</strong></td>
+                                <td><span class="game-tag mlbb">Divisi Mobile Legends</span></td>
+                                <td>Koordinator Event</td>
+                                <td><button class="btn-action">Edit Role</button></td>
+                            </tr>
+                            <tr>
+                                <td>230101045</td>
+                                <td><strong>Farhan Rizky</strong></td>
+                                <td><span class="game-tag caster">Divisi Caster & Stream</span></td>
+                                <td>Anggota Aktif</td>
+                                <td><button class="btn-action">Edit Role</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODUL PROGRAM KERJA & KEGIATAN -->
+        <section id="proker-section" class="tab-content">
+            <div class="dashboard-card">
+                <div class="card-header-flex">
+                    <div>
+                        <h3>Manajemen Program Kerja (Proker) & Kegiatan</h3>
+                        <p class="text-muted">Status progres dan jadwal pelaksanaan agenda UKM.</p>
+                    </div>
+                    <button class="button btn-sm">+ Tambah Proker</button>
+                </div>
+
+                <div class="card-grid">
+                    <article class="card">
+                        <div class="card-body">
+                            <span class="status status-running">Sedang Berjalan</span>
+                            <h3>Campus Esports Championship 2026</h3>
+                            <p>Turnamen Akbar Antar Fakultas cabang Valorant, MLBB, dan PUBG Mobile.</p>
+                            <p class="date">📅 Target Selesai: 15 Oktober 2026</p>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-body">
+                            <span class="status status-planned">Perencanaan</span>
+                            <h3>Bootcamp & Workshop Shoutcaster</h3>
+                            <p>Pelatihan teknik streaming OBS dan shoutcasting bersama pro-caster.</p>
+                            <p class="date">📅 Target Selesai: 05 November 2026</p>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-body">
+                            <span class="status status-done">Terlaksana</span>
+                            <h3>Open Recruitment & Trial Member 2026</h3>
+                            <p>Seleksi pendaftaran anggota dan talent baru UKM Esport.</p>
+                            <p class="date">📅 Selesai: 20 September 2026</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODUL KEPANITIAAN & TUGAS -->
+        <section id="panitia-section" class="tab-content">
+            <div class="dashboard-card">
+                <h3>🎪 Delegasi Kepanitiaan & Board Tugas</h3>
+                <p class="text-muted">Delegasikan tugas dari Ketua Umum ke tiap divisi panitia.</p>
+                <br>
+                <div class="task-list">
+                    <div class="task-item">
+                        <input type="checkbox" id="pt1">
+                        <label for="pt1">
+                            <strong>Penyusunan LPJ Keuangan Open Recruitment</strong>
+                            <span class="task-meta">Panitia Orec • PIC: Bendahara Panitia</span>
+                        </label>
+                        <span class="status status-planned">Pending</span>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox" id="pt2" checked>
+                        <label for="pt2">
+                            <strong>Koordinasi Humas ke BEM Kampus</strong>
+                            <span class="task-meta">Campus Championship • PIC: Divisi Humas</span>
+                        </label>
+                        <span class="status status-done">Selesai</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODUL ABSENSI DIGITAL -->
+        <section id="absensi-section" class="tab-content">
+            <div class="dashboard-card">
+                <div class="card-header-flex">
+                    <div>
+                        <h3>📝 Rekap Absensi Digital Kegiatan</h3>
+                        <p class="text-muted">Pencatatan kehadiran rapat, latihan rutin (scrim), dan event.</p>
+                    </div>
+                    <button class="button btn-sm" onclick="alert('Form Absensi Digital Dibuat!')">+ Buat Sesi Absensi Baru</button>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Tanggal Event</th>
+                                <th>Nama Kegiatan / Agenda</th>
+                                <th>Total Anggota Hadir</th>
+                                <th>Persentase</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>02 Okt 2026</td>
+                                <td>Rapat Pleno Evaluasi Proker</td>
+                                <td>42 / 45 Pengurus</td>
+                                <td><strong style="color:#4ade80;">93%</strong></td>
+                                <td><button class="btn-action">Unduh Rekap PDF</button></td>
+                            </tr>
+                            <tr>
+                                <td>25 Sep 2026</td>
+                                <td>Scrim Rutin Divisi Valorant & MLBB</td>
+                                <td>20 / 20 Player</td>
+                                <td><strong style="color:#4ade80;">100%</strong></td>
+                                <td><button class="btn-action">Unduh Rekap PDF</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

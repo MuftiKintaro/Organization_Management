@@ -17,7 +17,7 @@
         <div class="container navbar">
 
             <div class="logo">
-                <span class="logo-icon">🎮</span> ESPORT UMM
+                <span class="logo-icon"></span> CYBER ESPORT
             </div>
 
             <nav>
@@ -27,6 +27,8 @@
                     <li><a href="#program">Program Kerja</a></li>
                     <li><a href="#kegiatan">Kegiatan</a></li>
                     <li><a href="#laporan">Laporan</a></li>
+                    <!-- Tombol Login -->
+                    <li><button id="open-login-btn" class="button button-outline btn-sm">Login Member</button></li>
                 </ul>
             </nav>
 
@@ -60,15 +62,15 @@
                     <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80" alt="Esports Gaming Arena" class="hero-img">
                     <div class="hero-card-floating">
                         <div class="stat-box">
-                            <strong>60+</strong>
-                            <span>Pro Player</span>
+                            <strong>20</strong>
+                            <span>Player</span>
                         </div>
                         <div class="stat-box">
-                            <strong>4</strong>
+                            <strong>3</strong>
                             <span>Divisi Game</span>
                         </div>
                         <div class="stat-box">
-                            <strong>12</strong>
+                            <strong>6</strong>
                             <span>Trophy Kampus</span>
                         </div>
                     </div>
@@ -163,7 +165,7 @@
                             <span class="status status-planned">Direncanakan</span>
                             <h3>Esports Coaching Clinic & Bootcamp</h3>
                             <p>
-                                Sesi pelatihan strategi game dan mental bertanding bersama Kampus lain.
+                                Sesi pelatihan strategi game dan mental bertanding bersama mantan pro-player nasional.
                             </p>
                             <p class="date">📅 05 November 2026</p>
                         </div>
@@ -261,6 +263,50 @@
         </section>
 
     </main>
+
+
+    <!-- MODAL POP-UP LOGIN -->
+    <div id="login-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button type="button" id="close-login-btn" class="modal-close">&times;</button>
+            
+            <div class="modal-header">
+                <span class="modal-logo">🎮</span>
+                <h2>Portal Login Member</h2>
+                <p>Khusus Pengurus & Player Terdaftar</p>
+            </div>
+
+            <!-- Role Switcher -->
+            <div class="role-selector">
+                <button type="button" class="role-btn active" data-role="player">🎮 Player</button>
+                <button type="button" class="role-btn" data-role="pengurus">🛡️ Pengurus</button>
+            </div>
+
+            <!-- Form Input -->
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-id" id="label-id">Game ID / Nickname</label>
+                    <input type="text" id="login-id" placeholder="Contoh: RadiantPlayer#1234" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="login-password">Password / PIN Portal</label>
+                    <input type="password" id="login-password" placeholder="••••••••" required>
+                </div>
+
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox"> Ingat Saya
+                    </label>
+                    <a href="#" class="forgot-pass" onclick="alert('Silakan hubungi Divisi IT/Pengurus untuk reset PIN.'); return false;">Lupa PIN?</a>
+                </div>
+
+                <button type="submit" class="button button-full">Masuk Portal</button>
+            </form>
+
+            <div id="login-message" class="login-message"></div>
+        </div>
+    </div>
 
 
     <!-- FOOTER LENGKAP -->
