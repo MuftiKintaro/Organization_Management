@@ -46,59 +46,128 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Detail Panel Interaktif Card Program
-    const programCards = document.querySelectorAll("#program .card");
-    const programContainer = document.querySelector("#program .container");
 
-    if (programCards.length > 0 && programContainer) {
-        const detailBox = document.createElement("div");
-        detailBox.id = "program-detail-panel";
-        detailBox.style.marginTop = "35px";
-        detailBox.style.padding = "28px";
-        detailBox.style.backgroundColor = "#1e293b";
-        detailBox.style.border = "2px solid #06b6d4";
-        detailBox.style.borderRadius = "14px";
-        detailBox.style.boxShadow = "0 0 25px rgba(6, 182, 212, 0.2)";
-        detailBox.style.display = "none";
+    // =============================================================
+    // TAMBAHKAN KODE API PROGRAM / PROKER DI SINI
+    // (Menggantikan blok static card program lama)
+    // =============================================================
+    const API_URL = "data/program.json";
 
-        programContainer.appendChild(detailBox);
+    function loadProgramDataFromAPI() {
+        const landingContainer = document.querySelector("#program .card-grid");
+        const dashboardContainer = document.getElementById("proker-grid-container");
 
-        programCards.forEach(card => {
-            card.style.cursor = "pointer";
-            card.addEventListener("click", function () {
-                const statusText = card.querySelector(".status") ? card.querySelector(".status").textContent : "Informasi";
-                const titleText = card.querySelector("h3") ? card.querySelector("h3").textContent : "Detail Event";
-                const descText = card.querySelector("p") ? card.querySelector("p").textContent : "";
-                const dateText = card.querySelector(".date") ? card.querySelector(".date").textContent : "";
+        const targetContainer = landingContainer || dashboardContainer;
+        if (!targetContainer) return;
 
-                detailBox.innerHTML = `
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
-                        <span class="tag">📌 Detail Turnamen / Event Terpilih</span>
-                        <span class="status">${statusText}</span>
-                    </div>
-                    <h3 style="font-size: 22px; color: #f8fafc; margin-bottom: 10px;">${titleText}</h3>
-                    <p style="color: #94a3b8; margin-bottom: 20px; font-size: 15px;">${descText}</p>
-                    <div style="display: flex; justify-content: space-between; align-items: center; background-color: #0f172a; padding: 14px 18px; border-radius: 10px; flex-wrap: wrap; gap: 10px;">
-                        <span style="font-weight: bold; color: #06b6d4; font-size: 14px;">${dateText}</span>
-                        <button id="close-detail-btn" style="background-color: #ef4444; color: #ffffff; border: none; padding: 8px 16px; border-radius: 6px; font-weight: bold; cursor: pointer;">
-                            Tutup Detail
-                        </button>
-                    </div>
-                `;
+        targetContainer.innerHTML = `
+            <p style="grid-column: 1/-1; text-align: center; color: #06b6d4; padding: 20px;">
+                🔄 Memuat data dari API...
+            </p>`;
 
-                detailBox.style.display = "block";
-                detailBox.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        fetch(API_URL)
+            .then(response => {
+                if (!response.ok) throw new Error(`Status: ${response.status}`);
+                return response.json();
+            })
+            .then(dataList => {
+                renderProgramCards(dataList, targetContainer);
+            })
+            .catch(error => {
+                console.error("Fetch API Error:", error);
+                targetContainer.innerHTML = `
+                    <p style="grid-column: 1/-1; text-align: center; color: #ef4444; padding: 20px;">
+                        ❌ Gagal terhubung ke API (data/program.json).
+                    </p>`;
+            });
+    }
 
-                const closeBtn = document.getElementById("close-detail-btn");
-                if (closeBtn) {
-                    closeBtn.addEventListener("click", function (e) {
+    function renderProgramCards(data, container) {
+        container.innerHTML = "";
+
+        if (data.length === 0) {
+            container.innerHTML = `<p style="grid-column: 1/-1; text-align: center;">Tidak ada data program.</p>`;
+            return;
+        }
+
+        data.forEach(item => {
+            let statusClass = "status-planned";
+            if (item.status === "Sedang Berjalan" || item.status === "Berjalan") statusClass = "status-running";
+            if (item.status === "Terlaksana" || item.status === "Selesai") statusClass = "status-done";
+
+            const cardElement = document.createElement("article");
+            cardElement.className = "card";
+            cardElement.innerHTML = `
+                <div class="card-body">
+                    <span class="status ${statusClass}">${item.status || item.kategori}</span>
+                    <h3>${item.judul}</h3>
+                    <p>${item.deskripsi}</p>
+                    <p class="date">📅 ${item.tanggal}</p>
+                </div>
+            `;
+
+            container.appendChild(cardElement);
+        });
+
+        initCardClickEvents();
+    }
+
+    function initCardClickEvents() {
+        const programCards = document.querySelectorAll("#program .card");
+        const programContainer = document.querySelector("#program .container");
+
+        if (programCards.length > 0 && programContainer) {
+            let detailBox = document.getElementById("program-detail-panel");
+            if (!detailBox) {
+                detailBox = document.createElement("div");
+                detailBox.id = "program-detail-panel";
+                detailBox.style.marginTop = "35px";
+                detailBox.style.padding = "28px";
+                detailBox.style.backgroundColor = "#1e293b";
+                detailBox.style.border = "2px solid #06b6d4";
+                detailBox.style.borderRadius = "14px";
+                detailBox.style.boxShadow = "0 0 25px rgba(6, 182, 212, 0.2)";
+                detailBox.style.display = "none";
+                programContainer.appendChild(detailBox);
+            }
+
+            programCards.forEach(card => {
+                card.style.cursor = "pointer";
+                card.addEventListener("click", function () {
+                    const statusText = card.querySelector(".status") ? card.querySelector(".status").textContent : "Informasi";
+                    const titleText = card.querySelector("h3") ? card.querySelector("h3").textContent : "Detail Event";
+                    const descText = card.querySelector("p") ? card.querySelector("p").textContent : "";
+                    const dateText = card.querySelector(".date") ? card.querySelector(".date").textContent : "";
+
+                    detailBox.innerHTML = `
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+                            <span class="tag">📌 Detail Turnamen / Event Terpilih</span>
+                            <span class="status">${statusText}</span>
+                        </div>
+                        <h3 style="font-size: 22px; color: #f8fafc; margin-bottom: 10px;">${titleText}</h3>
+                        <p style="color: #94a3b8; margin-bottom: 20px; font-size: 15px;">${descText}</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center; background-color: #0f172a; padding: 14px 18px; border-radius: 10px; flex-wrap: wrap; gap: 10px;">
+                            <span style="font-weight: bold; color: #06b6d4; font-size: 14px;">${dateText}</span>
+                            <button id="close-detail-btn" style="background-color: #ef4444; color: #ffffff; border: none; padding: 8px 16px; border-radius: 6px; font-weight: bold; cursor: pointer;">
+                                Tutup Detail
+                            </button>
+                        </div>
+                    `;
+
+                    detailBox.style.display = "block";
+                    detailBox.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+                    document.getElementById("close-detail-btn")?.addEventListener("click", function (e) {
                         e.stopPropagation();
                         detailBox.style.display = "none";
                     });
-                }
+                });
             });
-        });
+        }
     }
+
+    // Jalankan fungsi fetch API saat halaman dibuka
+    loadProgramDataFromAPI();
 
     // =============================================================
     // 2. LOGIKA MODAL LOGIN & REDIRECT KE DASHBOARD
@@ -472,5 +541,24 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     });
+
+    // =============================================================
+    // LOGIKA LOGOUT
+    // =============================================================
+    const logoutBtn = document.getElementById("btn-logout");
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", function (e) {
+            e.preventDefault(); // Mencegah reload bawaan tag <a>
+
+            // Tampilkan konfirmasi ke user
+            const confirmLogout = confirm("Apakah Anda yakin ingin keluar dari sistem?");
+            
+            if (confirmLogout) {
+                // Arahkan kembali ke halaman test.html
+                window.location.href = "test.html";
+            }
+        });
+    }
 
 });
