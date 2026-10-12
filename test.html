@@ -35,7 +35,7 @@
         </div>
     </header>
 
-
+//test
     <!-- KANDUNGAN UTAMA -->
     <main>
 
@@ -94,38 +94,52 @@
 
                 <div class="card-grid">
 
-                    <article class="card">
-                        <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80" alt="Divisi PC Gaming" class="card-img">
-                        <div class="card-body">
-                            <div class="icon">🎯</div>
-                            <h3>Divisi Valorant (FPS)</h3>
-                            <p>
-                                Fokus pada taktik, ketangkasan aiming, dan komunikasi tim untuk kompetisi PC FPS antar perguruan tinggi.
-                            </p>
-                        </div>
-                    </article>
+                    
+                
+<article class="card" onclick="openDivisi('valorant')">
+    <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80"
+         alt="Divisi PC Gaming" class="card-img">
 
-                    <article class="card">
-                        <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80" alt="Divisi Mobile Gaming" class="card-img">
-                        <div class="card-body">
-                            <div class="icon">📱</div>
-                            <h3>Divisi MLBB (MOBA Mobile)</h3>
-                            <p>
-                                Wadah bagi player Mobile Legends untuk mengasah draft-pick, macro play, dan strategi liga kampus.
-                            </p>
-                        </div>
-                    </article>
+    <div class="card-body">
+        <div class="icon">🎯</div>
+        <h3>Divisi Valorant (FPS)</h3>
+        <p>
+            Fokus pada taktik, ketangkasan aiming, dan komunikasi tim untuk kompetisi PC FPS antar perguruan tinggi.
+        </p>
+    </div>
+</article>
 
-                    <article class="card">
-                        <img src="https://images.unsplash.com/photo-1561736778-92e52a7769ef?auto=format&fit=crop&w=600&q=80" alt="Divisi Caster & Streamer" class="card-img">
-                        <div class="card-body">
-                            <div class="icon">🎙️</div>
-                            <h3>Divisi Caster & Content Creator</h3>
-                            <p>
-                                Melatih bakat shoutcaster, OBS streaming operator, dan pembuat konten kreatif esports kampus.
-                            </p>
-                        </div>
-                    </article>
+
+
+                    
+<article class="card" onclick="openDivisi('mlbb')">
+    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80"
+         alt="Divisi Mobile Gaming" class="card-img">
+
+    <div class="card-body">
+        <div class="icon">📱</div>
+        <h3>Divisi MLBB (MOBA Mobile)</h3>
+        <p>
+            Wadah bagi player Mobile Legends untuk mengasah draft-pick, macro play, dan strategi liga kampus.
+        </p>
+    </div>
+</article>
+
+
+                   
+<article class="card" onclick="openDivisi('caster')">
+    <img src="https://images.unsplash.com/photo-1561736778-92e52a7769ef?auto=format&fit=crop&w=600&q=80"
+         alt="Divisi Caster & Content Creator" class="card-img">
+
+    <div class="card-body">
+        <div class="icon">🎙️</div>
+        <h3>Divisi Caster & Content Creator</h3>
+        <p>
+            Melatih bakat shoutcaster, OBS streaming operator, dan pembuat konten kreatif esports kampus.
+        </p>
+    </div>
+</article>
+
 
                 </div>
 
@@ -269,6 +283,33 @@
             <div id="login-message" class="login-message"></div>
         </div>
     </div>
+
+<!-- MODAL DETAIL DIVISI -->
+<div id="divisi-modal" class="modal-overlay">
+    <div class="divisi-modal-content">
+
+        <button type="button" class="modal-close"
+                onclick="closeDivisi()">&times;</button>
+
+        <div class="divisi-detail-header">
+            <h2 id="detail-title">Detail Divisi</h2>
+            <p id="detail-description"></p>
+        </div>
+
+        <div class="divisi-detail-section">
+            <h3>Informasi Divisi</h3>
+            <p><strong>Fokus:</strong> <span id="detail-focus"></span></p>
+            <p><strong>Kegiatan:</strong> <span id="detail-activities"></span></p>
+            <p><strong>Tujuan:</strong> <span id="detail-goal"></span></p>
+        </div>
+
+        <div class="divisi-detail-section">
+            <h3>Daftar Tim dan Anggota</h3>
+            <div id="detail-teams"></div>
+        </div>
+
+    </div>
+</div>
 
 
     <!-- FOOTER LENGKAP -->

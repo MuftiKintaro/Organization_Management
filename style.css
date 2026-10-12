@@ -915,3 +915,80 @@ a {
         grid-template-columns: 1fr;
     }
 }
+
+
+.card {
+    cursor: pointer;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: #00d9ff;
+}
+
+
+/* DETAIL DIVISI */
+#divisi-modal.active {
+    display: flex;
+}
+
+.divisi-modal-content {
+    width: 90%;
+    max-width: 750px;
+    max-height: 85vh;
+    overflow-y: auto;
+    margin: auto;
+    padding: 30px;
+    background: #1e293b;
+    color: #f8fafc;
+    border: 1px solid #334155;
+    border-radius: 14px;
+}
+
+.divisi-detail-header h2 {
+    color: #06b6d4;
+}
+
+.divisi-modal-content p {
+    color: #cbd5e1;
+    line-height: 1.7;
+}
+
+.modal-close {
+    float: right;
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.team-box {
+    margin-top: 18px;
+    padding: 16px;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    overflow-x: auto;
+}
+
+.team-box h4 {
+    color: #06b6d4;
+}
+
+.roster-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.roster-table th,
+.roster-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #334155;
+}
+
+.roster-table th {
+    color: #06b6d4;
+}

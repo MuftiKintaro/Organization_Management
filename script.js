@@ -562,3 +562,174 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
+
+
+    // =============================================================
+    // DETAIL DIVISI GAME & TALENT
+    // =============================================================
+
+    
+const dataDivisi = {
+    valorant: {
+        title: "Divisi Valorant (FPS)",
+        description: "Divisi kompetitif Valorant Cyber Esport.",
+        focus: "Aiming, strategi, komunikasi, dan koordinasi tim.",
+        activities: "Latihan rutin, scrim, evaluasi pertandingan, dan turnamen.",
+        goal: "Mengembangkan kemampuan pemain dan meraih prestasi esports.",
+
+        teams: [
+            {
+                name: "Tim SSV",
+                captain: "Raven",
+                members: [
+                    { nama: "Geraldo Agha Mahendra", nim: "20241010001", jurusan: "Teknik Informatika", status: " Captain/Flex" },
+                    { nama: "Muhammad Mufti Kintaro", nim: "20241010002", jurusan: "Teknik Informatika", status: "Duelist" },
+                    { nama: "Budi Anantha Trikurnia Irawan", nim: "20241010003", jurusan: "Teknik Informatika", status: " Controller" },
+                    { nama: "Fauzan Dwi Saputra", nim: "20241010004", jurusan: "Teknik Informatika", status: " Initiator" },
+                    { nama: "Berliano Putra Kukuh Wibowo", nim: "20241010005", jurusan: "Teknik Informatika", status: " Sentinel" },
+                    { nama: "Razky Ganendya Capriawan", nim: "20241010006", jurusan: "Teknik Informatika", status: "Pemain Cadangan" },
+                    { nama: "Muhammad Aditya Kharisma Putra", nim: "20241010007", jurusan: "Teknik Informatika", status: "Pemain Cadangan" }
+                ]
+            },
+
+            {
+                name: "Tim AXM",
+                captain: "Drax",
+                members: [
+                    { nama: "Drax", nim: "20241010008", jurusan: "Teknik Informatika", status: "Pemain Inti - Captain" },
+                    { nama: "Blaze", nim: "20241010009", jurusan: "Sistem Informasi", status: "Pemain Inti - Duelist" },
+                    { nama: "Frost", nim: "20241010010", jurusan: "Teknik Elektro", status: "Pemain Inti - Initiator" },
+                    { nama: "Kenz", nim: "20241010011", jurusan: "Teknik Informatika", status: "Pemain Inti - Controller" },
+                    { nama: "Reyn", nim: "20241010012", jurusan: "Teknik Industri", status: "Pemain Inti - Sentinel" },
+                    { nama: "Jett", nim: "20241010013", jurusan: "Sistem Informasi", status: "Pemain Cadangan" },
+                    { nama: "Ares", nim: "20241010014", jurusan: "Teknik Informatika", status: "Pemain Cadangan" }
+                ]
+            }
+        ]
+    },
+
+    mlbb: {
+        title: "Divisi MLBB (MOBA Mobile)",
+        description: "Divisi kompetitif Mobile Legends Cyber Esport.",
+        focus: "Draft pick, rotasi, penguasaan role, dan kerja sama tim.",
+        activities: "Latihan tim, scrim, analisis pertandingan, dan turnamen.",
+        goal: "Membangun tim MLBB yang solid dan kompetitif.",
+
+        teams: [
+            {
+                name: "Tim MLBB Alpha",
+                captain: "Arkan",
+                members: [
+                    { nama: "Arkan", nim: "20241020001", jurusan: "Teknik Informatika", status: "Pemain Inti - Jungler / Captain" },
+                    { nama: "Bima", nim: "20241020002", jurusan: "Sistem Informasi", status: "Pemain Inti - Gold Laner" },
+                    { nama: "Cakra", nim: "20241020003", jurusan: "Teknik Elektro", status: "Pemain Inti - EXP Laner" },
+                    { nama: "Daffa", nim: "20241020004", jurusan: "Teknik Informatika", status: "Pemain Inti - Mid Laner" },
+                    { nama: "Evan", nim: "20241020005", jurusan: "Manajemen", status: "Pemain Inti - Roamer" }
+                ]
+            }
+        ]
+    },
+
+    caster: {
+        title: "Divisi Caster & Content Creator",
+        description: "Divisi yang mendukung penyiaran dan publikasi kegiatan esports.",
+        focus: "Shoutcasting, editing video, desain konten, dan streaming.",
+        activities: "Latihan casting, produksi konten, dan siaran turnamen.",
+        goal: "Mengembangkan talent kreatif untuk mendukung kegiatan esports.",
+
+        teams: [
+            {
+                name: "Tim Media & Broadcasting",
+                captain: "Nama Koordinator",
+                members: [
+                    { nama: "Nama Anggota 1", nim: "NIM Anggota 1", jurusan: "Ilmu Komunikasi" },
+                    { nama: "Nama Anggota 2", nim: "NIM Anggota 2", jurusan: "Desain Komunikasi Visual" }
+                ]
+            }
+        ]
+    }
+};
+
+
+
+    // Fungsi membuka detail divisi
+    window.openDivisi = function(kode) {
+        const data = dataDivisi[kode];
+        const modal = document.getElementById("divisi-modal");
+
+        if (!data || !modal) {
+            console.error("Data divisi atau modal tidak ditemukan.");
+            return;
+        }
+
+        document.getElementById("detail-title").textContent = data.title;
+        document.getElementById("detail-description").textContent = data.description;
+        document.getElementById("detail-focus").textContent = data.focus;
+        document.getElementById("detail-activities").textContent = data.activities;
+        document.getElementById("detail-goal").textContent = data.goal;
+
+        const container = document.getElementById("detail-teams");
+        container.replaceChildren();
+
+        data.teams.forEach(function(team) {
+            const box = document.createElement("div");
+            box.className = "team-box";
+
+            const heading = document.createElement("h4");
+            heading.textContent = team.name;
+            box.appendChild(heading);
+
+            const captain = document.createElement("p");
+            captain.textContent = "Kapten/Koordinator: " + team.captain;
+            box.appendChild(captain);
+
+            const table = document.createElement("table");
+            table.className = "roster-table";
+
+            table.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Nama Anggota</th>
+                        <th>NIM</th>
+                        <th>Jurusan</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            `;
+
+            const tbody = table.querySelector("tbody");
+
+            team.members.forEach(function(member) {
+                const row = document.createElement("tr");
+
+                [member.nama, member.nim, member.jurusan, member.status || "-"].forEach(function(value) { 
+                    const cell = document.createElement("td");
+                    cell.textContent = value;
+                    row.appendChild(cell);
+                });
+
+                tbody.appendChild(row);
+            });
+
+            box.appendChild(table);
+            container.appendChild(box);
+        });
+
+        modal.classList.add("active");
+    };
+
+    // Fungsi menutup detail divisi
+    window.closeDivisi = function() {
+        document.getElementById("divisi-modal")?.classList.remove("active");
+    };
+
+    // Menutup detail jika area luar kotak diklik
+    const divisiModal = document.getElementById("divisi-modal");
+
+    if (divisiModal) {
+        divisiModal.addEventListener("click", function(event) {
+            if (event.target === divisiModal) {
+                window.closeDivisi();
+            }
+        });
+    }
