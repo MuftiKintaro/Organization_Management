@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // TAMBAHKAN KODE API PROGRAM / PROKER DI SINI
     // (Menggantikan blok static card program lama)
     // =============================================================
-    const API_URL = "data/program.json";
+    const API_URL = "data/program.php";
 
     function loadProgramDataFromAPI() {
         const landingContainer = document.querySelector("#program .card-grid");
