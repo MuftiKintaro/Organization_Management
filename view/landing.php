@@ -134,6 +134,30 @@
         </section>
 
 
+        <!-- PROFIL PENGURUS (DATA MVC) -->
+        <section id="pengurus" class="section section-light">
+            <div class="container">
+                <div class="section-heading">
+                    <span class="tag">Struktur Kepengurusan</span>
+                    <h2>Profil Ketua & Pengurus (MVC)</h2>
+                    <p>
+                        Data pengurus dan program kerja yang dikelola dengan arsitektur Model-View-Controller.
+                    </p>
+                </div>
+
+                <div style="background: #131b2e; border: 1px solid #1e293b; border-radius: 16px; padding: 30px; max-width: 650px; margin: 0 auto; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+                    <img src="asset/fotobudi.jpeg" alt="Foto Budi Anantha" style="width: 120px; height: 120px; border-radius: 50%; border: 3px solid #06b6d4; object-fit: cover; margin-bottom: 15px; box-shadow: 0 0 15px rgba(6,182,212,0.3);">
+                    <h3 style="margin: 0 0 5px 0; color: #f8fafc; font-size: 1.6rem;">Budi Anantha</h3>
+                    <p style="color: #38bdf8; font-weight: 600; font-size: 0.95rem; margin: 0 0 12px 0;">Ketua Umum UKM Esports (Periode 2026 - 2027)</p>
+                    <p style="color: #94a3b8; font-size: 0.92rem; line-height: 1.6; margin: 0 0 20px 0;">
+                        Ketua Umum UKM Esports periode 2026/2027 yang berfokus pada pembinaan talenta mahasiswa di bidang esports nasional.
+                    </p>
+                    <a href="index.php?page=pengurus" class="button">Buka Halaman Pengurus & Proker (MVC Lengkap) →</a>
+                </div>
+            </div>
+        </section>
+
+
         <!-- PROGRAM KERJA -->
         <section id="program">
             <div class="container">

@@ -1,11 +1,13 @@
 <?php
 /**
  * MODEL: PengurusModel.php
- * Tugas Pertemuan 7 - Web Programming: Task 01 & Task 03
+ * Tugas Pertemuan 7 - Web Programming: Task 01, Task 02, & Task 03
+ * 
  * Tanggung Jawab:
- * - Mengelola data profil pengurus (name, period, profil, avatar)
- * - Mengelola data program kerja UKM Esports (programs)
- * - Menyediakan method untuk query, filter, dan pengambilan data spesifik
+ * - Mengelola data profil Ketua Umum (name, period, profil, avatar)
+ * - Mengelola data jajaran Badan Pengurus Harian (BPH)
+ * - Mengelola data program kerja UKM Esports (CRUD: Read & Create)
+ * - Menghitung logika statistik proker (Business Logic)
  */
 
 class PengurusModel {
@@ -17,7 +19,7 @@ class PengurusModel {
     public $avatar;
 
     public function __construct() {
-        // Inisialisasi data profil pengurus UKM Esports
+        // Inisialisasi data profil Ketua Umum
         $this->name    = 'Budi Anantha';
         $this->period  = '2026 - 2027';
         $this->profil  = 'Ketua Umum UKM Esports periode 2026/2027 yang berfokus pada pembinaan talenta mahasiswa di bidang esports nasional.';
@@ -28,9 +30,9 @@ class PengurusModel {
     }
 
     /**
-     * Memuat program kerja dari JSON (dengan fallback array jika file tidak ada)
+     * Memuat program kerja dari JSON (dengan fallback array)
      */
-    private function loadPrograms() {
+    public function loadPrograms() {
         $jsonPath = __DIR__ . '/../data/program.json';
         
         if (file_exists($jsonPath)) {
@@ -74,7 +76,7 @@ class PengurusModel {
     }
 
     /**
-     * Mengambil data profil pengurus
+     * Mengambil data profil Ketua Umum
      * @return array
      */
     public function getProfile() {
@@ -83,6 +85,47 @@ class PengurusModel {
             'periode' => $this->period,
             'profil'  => $this->profil,
             'avatar'  => $this->avatar
+        ];
+    }
+
+    /**
+     * Mengambil seluruh jajaran Badan Pengurus Harian (BPH)
+     * @return array
+     */
+    public function getBphList() {
+        return [
+            [
+                'jabatan' => 'Ketua Umum',
+                'nama'    => 'Budi Anantha',
+                'nim'     => '230101001',
+                'avatar'  => 'asset/fotobudi.jpeg',
+                'badge'   => '👑 Pimpinan',
+                'fokus'   => 'Regulasi & Hubungan Kampus'
+            ],
+            [
+                'jabatan' => 'Wakil Ketua Umum',
+                'nama'    => 'Reynaldi Pratama',
+                'nim'     => '230101002',
+                'avatar'  => 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=300&q=80',
+                'badge'   => '⚔️ Operasional',
+                'fokus'   => 'Roster Atlet & Turnamen'
+            ],
+            [
+                'jabatan' => 'Sekretaris Umum',
+                'nama'    => 'Siti Rahma',
+                'nim'     => '230101015',
+                'avatar'  => 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80',
+                'badge'   => '📝 Administrasi',
+                'fokus'   => 'Notulensi, SK & Surat Keluar'
+            ],
+            [
+                'jabatan' => 'Bendahara Umum',
+                'nama'    => 'Nabila Putri',
+                'nim'     => '230101020',
+                'avatar'  => 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80',
+                'badge'   => '💰 Keuangan',
+                'fokus'   => 'Anggaran Dana & Kas UKM'
+            ]
         ];
     }
 
@@ -96,7 +139,6 @@ class PengurusModel {
 
     /**
      * Mengambil 1 program kerja berdasarkan ID
-     * (Digunakan pada Controller method show())
      * @param int|string $id
      * @return array|null
      */
@@ -110,8 +152,7 @@ class PengurusModel {
     }
 
     /**
-     * Memfilter program kerja berdasarkan status atau kata kunci pencarian
-     * (Digunakan pada Controller method process())
+     * Memfilter program kerja berdasarkan status atau kata kunci
      * @param string|null $status
      * @param string|null $keyword
      * @return array
@@ -137,5 +178,65 @@ class PengurusModel {
         }
 
         return array_values($filtered);
+    }
+
+    /**
+     * Menghitung statistik & progres ketercapaian program kerja (Business Logic)
+     * @return array
+     */
+    public function getStatistics() {
+        $total = count($this->programs);
+        $running = 0;
+        $planned = 0;
+        $done = 0;
+
+        foreach ($this->programs as $prog) {
+            $st = $prog['status'] ?? 'Perencanaan';
+            if ($st === 'Sedang Berjalan' || $st === 'Berjalan') {
+                $running++;
+            } elseif ($st === 'Terlaksana' || $st === 'Selesai') {
+                $done++;
+            } else {
+                $planned++;
+            }
+        }
+
+        $percentage = $total > 0 ? round(($done / $total) * 100) : 0;
+
+        return [
+            'total'      => $total,
+            'running'    => $running,
+            'planned'    => $planned,
+            'done'       => $done,
+            'percentage' => $percentage
+        ];
+    }
+
+    /**
+     * Menambahkan program kerja baru ke dalam data/program.json (Create Data)
+     * @param array $newProgram
+     * @return bool
+     */
+    public function addProgram($newProgram) {
+        $jsonPath = __DIR__ . '/../data/program.json';
+        
+        // Tentukan ID baru
+        $maxId = 0;
+        foreach ($this->programs as $prog) {
+            if (isset($prog['id']) && $prog['id'] > $maxId) {
+                $maxId = (int)$prog['id'];
+            }
+        }
+        $newProgram['id'] = $maxId + 1;
+
+        // Tambahkan ke array lokal
+        $this->programs[] = $newProgram;
+
+        // Simpan kembali ke file JSON
+        $encoded = json_encode($this->programs, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+        if ($encoded !== false) {
+            return (bool)file_put_contents($jsonPath, $encoded);
+        }
+        return false;
     }
 }

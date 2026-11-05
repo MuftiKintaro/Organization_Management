@@ -8,10 +8,12 @@
  * - index.php?page=pengurus        => Menjalankan PengurusController (Tugas MVC Pertemuan 7)
  * - index.php?page=dashboard       => Menampilkan Dashboard Manajemen Organisasi (PHP)
  * 
- * Controller Methods (Pertemuan 7 - Task 02):
- * - index.php?page=pengurus&action=index    => index() (Daftar semua proker & profil)
- * - index.php?page=pengurus&action=show&id= => show($id) (Detail 1 proker)
- * - index.php?page=pengurus&action=process  => process() (Filter status & pencarian)
+ * Controller Methods:
+ * - action=index    => index() (Daftar semua proker, statistik & profil BPH)
+ * - action=show&id= => show($id) (Detail 1 proker)
+ * - action=process  => process() (Filter status & pencarian)
+ * - action=store    => store() (Simpan proker baru via POST)
+ * - action=export   => export() (Unduh data JSON proker)
  */
 
 require_once __DIR__ . '/controller/PengurusController.php';
@@ -33,6 +35,10 @@ switch ($page) {
             $controller->show($_GET['id'] ?? null);
         } elseif ($action === 'process') {
             $controller->process();
+        } elseif ($action === 'store') {
+            $controller->store();
+        } elseif ($action === 'export') {
+            $controller->export();
         } else {
             $controller->index();
         }
