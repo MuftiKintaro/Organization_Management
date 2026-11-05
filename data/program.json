@@ -2,6 +2,7 @@
   {
     "id": 1,
     "judul": "Campus Esports Championship 2026",
+    "icon": "🏆",
     "deskripsi": "Turnamen terbesar antar fakultas melingkupi cabang game Valorant, Mobile Legends, dan PUBG Mobile.",
     "kategori": "Turnamen",
     "tanggal": "15 Oktober 2026",
@@ -10,6 +11,7 @@
   {
     "id": 2,
     "judul": "Esports Coaching Clinic & Bootcamp",
+    "icon": "🎓",
     "deskripsi": "Sesi pelatihan strategi game dan mental bertanding bersama mantan pro-player nasional.",
     "kategori": "Pelatihan",
     "tanggal": "05 November 2026",
@@ -18,6 +20,7 @@
   {
     "id": 3,
     "judul": "Internal Scrim & Talent Scouting",
+    "icon": "🎯",
     "deskripsi": "Seleksi terbuka untuk penyaringan player berbakat yang akan masuk dalam Roster Utama UKM.",
     "kategori": "Seleksi",
     "tanggal": "20 September 2026",

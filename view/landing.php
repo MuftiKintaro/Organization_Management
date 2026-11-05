@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UKM Esport - Campus Gaming Hub</title>
+
+    <!-- Sambungkan ke CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HEADER / NAVIGASI UTAMA -->
+    <header class="header">
+        <div class="container navbar">
+
+            <div class="logo">
+                <span class="logo-icon">🎮</span> CYBER ESPORT
+            </div>
+
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#beranda">Beranda</a></li>
+                    <li><a href="#anggota">Divisi & Roster</a></li>
+                    <li><a href="#program">Program Kerja</a></li>
+                    <li><a href="#kegiatan">Kegiatan</a></li>
+                    <li><a href="#laporan">Laporan</a></li>
+                    <!-- Navigasi Halaman PHP MVC & Dashboard -->
+                    <li><a href="index.php?page=pengurus" style="color: #06b6d4; font-weight: bold;">👤 Pengurus (MVC)</a></li>
+                    <li><button id="open-login-btn" class="button button-outline btn-sm">Login Member</button></li>
+                </ul>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <!-- KANDUNGAN UTAMA -->
+    <main>
+
+        <!-- HERO SECTION -->
+        <section id="beranda" class="hero">
+            <div class="container hero-content">
+
+                <div class="hero-text">
+                    <span class="tag">Unit Kegiatan Mahasiswa Esports</span>
+                    <h1>
+                        Wadah Bakat & Prestasi Gaming
+                        <span>Mahasiswa</span>
+                    </h1>
+                    <p>
+                        Pusat pengelolaan divisi game, turnamen kampus, latihan rutin (scrim), serta pengembangan talent shoutcaster & media streaming secara profesional.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#program" class="button">Lihat Turnamen</a>
+                        <a href="index.php?page=pengurus" class="button button-outline">Struktur Pengurus (MVC)</a>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80" alt="Esports Gaming Arena" class="hero-img">
+                    <div class="hero-card-floating">
+                        <div class="stat-box">
+                            <strong>20</strong>
+                            <span>Player</span>
+                        </div>
+                        <div class="stat-box">
+                            <strong>3</strong>
+                            <span>Divisi Game</span>
+                        </div>
+                        <div class="stat-box">
+                            <strong>6</strong>
+                            <span>Trophy Kampus</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ANGGOTA DAN DIVISI GAME -->
+        <section id="anggota" class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="tag">Game Division</span>
+                    <h2>Divisi Game & Talent</h2>
+                    <p>
+                        Daftar divisi game kompetitif dan tim official UKM Esport kampus.
+                    </p>
+                </div>
+
+                <div class="card-grid">
+
+                    <article class="card">
+                        <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80" alt="Divisi PC Gaming" class="card-img">
+                        <div class="card-body">
+                            <div class="icon">🎯</div>
+                            <h3>Divisi Valorant (FPS)</h3>
+                            <p>
+                                Fokus pada taktik, ketangkasan aiming, dan komunikasi tim untuk kompetisi PC FPS antar perguruan tinggi.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80" alt="Divisi Mobile Gaming" class="card-img">
+                        <div class="card-body">
+                            <div class="icon">📱</div>
+                            <h3>Divisi MLBB (MOBA Mobile)</h3>
+                            <p>
+                                Wadah bagi player Mobile Legends untuk mengasah draft-pick, macro play, dan strategi liga kampus.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <img src="https://images.unsplash.com/photo-1561736778-92e52a7769ef?auto=format&fit=crop&w=600&q=80" alt="Divisi Caster & Streamer" class="card-img">
+                        <div class="card-body">
+                            <div class="icon">🎙️</div>
+                            <h3>Divisi Caster & Content Creator</h3>
+                            <p>
+                                Melatih bakat shoutcaster, OBS streaming operator, dan pembuat konten kreatif esports kampus.
+                            </p>
+                        </div>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- PROGRAM KERJA -->
+        <section id="program">
+            <div class="container">
+                <div class="section-heading">
+                    <span class="tag">Agenda Esports</span>
+                    <h2>Program Kerja & Turnamen</h2>
+                    <p>
+                        Jadwal kejuaraan, coaching clinic, dan event utama UKM Esport.
+                        <a href="index.php?page=pengurus" style="color: #06b6d4; text-decoration: none; font-weight: bold; margin-left: 8px;">→ Kelola & Lihat Detail Pengurus via MVC Pattern</a>
+                    </p>
+                </div>
+
+                <!-- WAJIB ADA: Elemen ini tempat JS memasukkan data API -->
+                <div class="card-grid">
+                    <!-- Biarkan kosong di sini, diisi oleh script.js -->
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- KEGIATAN -->
+        <section id="kegiatan" class="section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="tag">Aktivitas Rutin</span>
+                    <h2>Kegiatan & Sparring</h2>
+                    <p>
+                        Jadwal latihan tanding (scrimmage) dan workshop mingguan.
+                    </p>
+                </div>
+
+                <div class="activity-list">
+
+                    <article class="activity">
+                        <div class="activity-date">
+                            <strong>02</strong>
+                            <span>OKT</span>
+                        </div>
+                        <div class="activity-info">
+                            <h3>Weekly Scrim: UKM Esport vs Universitas Tetangga</h3>
+                            <p>
+                                Latihan tanding persahabatan divisi Valorant dan MLBB untuk menguji chemistry tim.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="activity">
+                        <div class="activity-date">
+                            <strong>12</strong>
+                            <span>OKT</span>
+                        </div>
+                        <div class="activity-info">
+                            <h3>Workshop Shoutcasting & Live Production</h3>
+                            <p>
+                                Pelatihan dasar menjadi shoutcaster esports profesional dan penggunaan software streaming OBS.
+                            </p>
+                        </div>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- LAPORAN -->
+        <section id="laporan" class="section section-light">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="tag">Transparansi UKM</span>
+                    <h2>Laporan & Rekap Prestasi</h2>
+                    <p>
+                        Dokumentasi pencapaian trophy, laporan kas, dan evaluasi pengurus.
+                    </p>
+                </div>
+
+                <div class="report-box">
+                    <div>
+                        <h3>Laporan Kinerja & Prestasi Turnamen</h3>
+                        <p>
+                            Arsip resmi pencapaian juara tim kampus, laporan keuangan operasional, serta statistik per divisi.
+                        </p>
+                    </div>
+                    <button type="button" class="button">
+                        Lihat Laporan
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- MODAL POP-UP LOGIN -->
+    <div id="login-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button type="button" id="close-login-btn" class="modal-close">&times;</button>
+            
+            <div class="modal-header">
+                <span class="modal-logo">🎮</span>
+                <h2>Portal Login Member</h2>
+                <p>Khusus Pengurus & Player Terdaftar</p>
+            </div>
+
+            <!-- Role Switcher -->
+            <div class="role-selector">
+                <button type="button" class="role-btn active" data-role="player">🎮 Player</button>
+                <button type="button" class="role-btn" data-role="pengurus">🛡️ Pengurus</button>
+            </div>
+
+            <!-- Form Input -->
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-id" id="label-id">Game ID / Nickname</label>
+                    <input type="text" id="login-id" placeholder="Contoh: RadiantPlayer#1234" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="login-password">Password / PIN Portal</label>
+                    <input type="password" id="login-password" placeholder="••••••••" required>
+                </div>
+
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox"> Ingat Saya
+                    </label>
+                    <a href="#" class="forgot-pass" onclick="alert('Silakan hubungi Divisi IT/Pengurus untuk reset PIN.'); return false;">Lupa PIN?</a>
+                </div>
+
+                <button type="submit" class="button button-full">Masuk Portal</button>
+            </form>
+
+            <div id="login-message" class="login-message"></div>
+        </div>
+    </div>
+
+
+    <!-- FOOTER LENGKAP -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <h3>🎮 CYBER ESPORT UKM</h3>
+                <p>Wadah Resmi Pengembangan Potensi Esports & Gaming Mahasiswa Kampus.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Navigasi Cepat</h4>
+                <a href="#beranda">Beranda</a>
+                <a href="#anggota">Divisi Game</a>
+                <a href="#program">Turnamen</a>
+                <a href="index.php?page=pengurus">Pengurus & Proker (MVC)</a>
+                <a href="index.php?page=dashboard">Portal Dashboard</a>
+            </div>
+            <div class="footer-copy">
+                <p>&copy; 2026 Cyber Esports UKM. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

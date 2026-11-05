@@ -246,7 +246,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 setTimeout(() => {
                     if (loginModal) loginModal.classList.remove("active");
                     loginForm.reset();
-                    window.location.href = `dashboard.html?role=${currentRole}&user=${encodeURIComponent(username)}`;
+                    window.location.href = `index.php?page=dashboard&role=${currentRole}&user=${encodeURIComponent(username)}`;
                 }, 1000);
             } else {
                 if (loginMessage) {
@@ -556,7 +556,7 @@ document.addEventListener("DOMContentLoaded", function () {
             
             if (confirmLogout) {
                 // Arahkan kembali ke halaman test.html
-                window.location.href = "test.html";
+                window.location.href = "index.php";
             }
         });
     }
