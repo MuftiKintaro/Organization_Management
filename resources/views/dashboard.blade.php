@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Ketua Umum - Platform Integrasi UKM Esport</title>
+    <link rel="stylesheet" href="{{ asset('style.css') }}">
+</head>
+
+<body class="dashboard-body">
+
+    <!-- DASHBOARD SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <span class="logo-icon">🎮</span> ESPORT HUB
+        </div>
+
+        <div class="user-profile-card">
+            <div class="avatar" id="user-avatar">👑</div>
+            <div class="user-info">
+                <h4 id="user-display-name">Ketua Umum UKM</h4>
+                <span id="user-display-role" class="role-badge role-ketua">Role: Ketua Umum</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="#overview" class="nav-item active" data-tab="overview">📊 Ringkasan Eksekutif</a>
+            <a href="#anggota" class="nav-item" data-tab="anggota">👥 Anggota & Divisi</a>
+            <a href="#proker" class="nav-item" data-tab="proker">🎯 Proker & Kegiatan</a>
+            <a href="#panitia" class="nav-item" data-tab="panitia">🎪 Kepanitiaan & Tugas</a>
+            <a href="#absensi" class="nav-item" data-tab="absensi">📝 Rekap Absensi</a>
+
+            <!-- Link ke Halaman Pengurus & Landing Page -->
+            <a href="{{ url('/pengurus') }}" class="nav-item" style="color: #06b6d4; font-weight: bold;">👤 Pengurus & Proker (MVC)</a>
+            <a href="{{ url('/') }}" class="nav-item">🏠 Landing Page</a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="#" id="btn-logout" class="nav-item">🚪 Keluar</a>
+        </div>
+    </aside>
+
+    <!-- DASHBOARD MAIN CONTENT -->
+    <main class="dashboard-main">
+
+        <!-- TOPBAR -->
+        <header class="dashboard-topbar">
+            <div>
+                <h2>Pusat Kendali Organisasi UKM</h2>
+                <p class="text-muted">Pantau seluruh aktivitas, anggota, dan tugas organisasi dalam satu tempat.</p>
+            </div>
+            <div class="topbar-status">
+                <span class="status-indicator"></span> Mode Akses: <strong>Ketua Umum (Full Access)</strong>
+            </div>
+        </header>
+
+        <!-- RINGKASAN STATISTIK UTAMA -->
+        <section id="overview-section" class="tab-content active">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-icon">👥</span>
+                    <div>
+                        <h3 id="stat-total-anggota">68 Anggota</h3>
+                        <p>Total Anggota & Pengurus</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-icon">🎯</span>
+                    <div>
+                        <h3>4 Divisi</h3>
+                        <p>Valorant, MLBB, Caster, Media</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-icon">📌</span>
+                    <div>
+                        <h3 id="stat-total-proker">{{ $programList->count() }} Proker</h3>
+                        <p>Program Kerja Aktif</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-icon">📝</span>
+                    <div>
+                        <h3>94.5%</h3>
+                        <p>Rata-rata Kehadiran</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODUL TUGAS & KEPANITIAAN CEPAT -->
+            <div class="dashboard-grid-2col">
+                <!-- PANEL MONITORING TUGAS -->
+                <div class="dashboard-card">
+                    <div class="card-header-flex">
+                        <h3>📌 Penugasan Kepanitiaan Aktif</h3>
+                        <button class="button btn-sm" id="btn-open-task-modal">+ Buat Tugas Baru</button>
+                    </div>
+                    <div class="task-list" id="task-list-container">
+                        <div class="task-item">
+                            <input type="checkbox" id="task1">
+                            <label for="task1">
+                                <strong>Finalisasi Vendor Stage Tournament</strong>
+                                <span class="task-meta">Panitia Campus Esports 2026 • PIC: Divisi Event</span>
+                            </label>
+                            <span class="status status-running">In Progress</span>
+                        </div>
+                        <div class="task-item">
+                            <input type="checkbox" id="task2">
+                            <label for="task2">
+                                <strong>Penerbitan SK Pengurus & Roster Official</strong>
+                                <span class="task-meta">Internal UKM • PIC: Sekretaris</span>
+                            </label>
+                            <span class="status status-planned">Pending Review</span>
+                        </div>
+                        <div class="task-item">
+                            <input type="checkbox" id="task3" checked>
+                            <label for="task3" class="task-completed-text">
+                                <strong>Pengajuan Proposal Dana Rektorat</strong>
+                                <span class="task-meta">Internal UKM • PIC: Bendahara</span>
+                            </label>
+                            <span class="status status-done">Selesai</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PANEL ABSENSI TERAKHIR -->
+                <div class="dashboard-card">
+                    <div class="card-header-flex">
+                        <h3>📝 Kehadiran Kegiatan Terakhir</h3>
+                        <span class="tag">Rapat Rutin Pengurus</span>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Nama / Divisi</th>
+                                    <th>Jabatan / Role</th>
+                                    <th>Status Absen</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Alex Bima</strong></td>
+                                    <td>Ketua Divisi MLBB</td>
+                                    <td><span class="status status-running">Hadir (Tepat Waktu)</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Siti Rahma</strong></td>
+                                    <td>Sekretaris Umum</td>
+                                    <td><span class="status status-running">Hadir (Tepat Waktu)</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Dedi Kurnia</strong></td>
+                                    <td>Anggota Divisi Caster</td>
+                                    <td><span class="status status-planned">Izin (Sakit)</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODUL MANAGEMENT ANGGOTA & DIVISI -->
+        <section id="anggota-section" class="tab-content">
+            <div class="dashboard-card">
+                <div class="card-header-flex">
+                    <div>
+                        <h3>Pengelolaan Anggota & Struktur Divisi</h3>
+                        <p class="text-muted">Kelola data seluruh pengurus, divisi game, dan status keanggotaan.</p>
+                    </div>
+                    <button class="button btn-sm" id="btn-open-member-modal">+ Tambah Anggota Baru</button>
+                </div>
+
+                <!-- FILTER & SEARCH BAR -->
+                <div class="table-filter-bar">
+                    <input type="text" id="search-member-input" placeholder="🔍 Cari Nama / NIM Anggota..." class="filter-input">
+                    <select id="filter-division-select" class="filter-select">
+                        <option value="all">Semua Divisi</option>
+                        <option value="Valorant">Divisi Valorant</option>
+                        <option value="Mobile Legends">Divisi Mobile Legends</option>
+                        <option value="Caster">Divisi Caster & Stream</option>
+                    </select>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="data-table" id="member-table">
+                        <thead>
+                            <tr>
+                                <th>NIM</th>
+                                <th>Nama Lengkap</th>
+                                <th>Divisi</th>
+                                <th>Jabatan / Status</th>
+                                <th>Aksi Ketua</th>
+                            </tr>
+                        </thead>
+                        <tbody id="member-table-body">
+                            <tr>
+                                <td>230101001</td>
+                                <td><strong>Reynaldi Pratama</strong></td>
+                                <td><span class="game-tag valorant">Divisi Valorant</span></td>
+                                <td>Kapten Tim Principal</td>
+                                <td>
+                                    <button class="btn-action btn-delete-row">Hapus</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>230101012</td>
+                                <td><strong>Nabila Putri</strong></td>
+                                <td><span class="game-tag mlbb">Divisi Mobile Legends</span></td>
+                                <td>Koordinator Event</td>
+                                <td>
+                                    <button class="btn-action btn-delete-row">Hapus</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>230101045</td>
+                                <td><strong>Farhan Rizky</strong></td>
+                                <td><span class="game-tag caster">Divisi Caster & Stream</span></td>
+                                <td>Anggota Aktif</td>
+                                <td>
+                                    <button class="btn-action btn-delete-row">Hapus</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODUL PROGRAM KERJA & KEGIATAN (DATA MYSQL VIA ELOQUENT ORM) -->
+        <section id="proker-section" class="tab-content">
+            <div class="dashboard-card">
+                <div class="card-header-flex">
+                    <div>
+                        <h3>Manajemen Program Kerja (Proker) & Kegiatan</h3>
+                        <p class="text-muted">Status progres dan jadwal pelaksanaan agenda UKM dari database.</p>
+                    </div>
+                    <button class="button btn-sm" id="btn-open-proker-modal">+ Tambah Proker</button>
+                </div>
+
+                <div class="card-grid" id="proker-grid-container">
+                    @forelse ($programList as $item)
+                        @php
+                            $statusText = $item->status ?? 'Perencanaan';
+                            $statusClass = 'status-planned';
+                            if ($statusText === 'Sedang Berjalan' || $statusText === 'Berjalan') {
+                                $statusClass = 'status-running';
+                            } elseif ($statusText === 'Terlaksana' || $statusText === 'Selesai') {
+                                $statusClass = 'status-done';
+                            }
+                        @endphp
+                        <article class="card">
+                            <div class="card-body">
+                                <span class="status {{ $statusClass }}">{{ $statusText }}</span>
+                                <h3>{{ $item->icon ?? '🎮' }} {{ $item->judul }}</h3>
+                                <p>{{ $item->deskripsi }}</p>
+                                @if($item->tanggal)
+                                    <p class="date">📅 Target: {{ $item->tanggal }}</p>
+                                @endif
+                            </div>
+                        </article>
+                    @empty
+                        <p style="grid-column: 1/-1; text-align: center; color: #94a3b8;">Belum ada data program kerja di database.</p>
+                    @endforelse
+                </div>
+            </div>
+        </section>
+
+        <!-- MODUL KEPANITIAAN & TUGAS -->
+        <section id="panitia-section" class="tab-content">
+            <div class="dashboard-card">
+                <div class="card-header-flex">
+                    <div>
+                        <h3>🎪 Delegasi Kepanitiaan & Board Tugas</h3>
+                        <p class="text-muted">Delegasikan tugas dari Ketua Umum ke tiap divisi panitia.</p>
+                    </div>
+                    <button class="button btn-sm" id="btn-open-task-modal-2">+ Buat Tugas Baru</button>
+                </div>
+
+                <div class="task-list" id="panitia-task-list">
+                    <div class="task-item">
+                        <input type="checkbox" id="pt1">
+                        <label for="pt1">
+                            <strong>Penyusunan LPJ Keuangan Open Recruitment</strong>
+                            <span class="task-meta">Panitia Orec • PIC: Bendahara Panitia</span>
+                        </label>
+                        <span class="status status-planned">Pending</span>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox" id="pt2" checked>
+                        <label for="pt2" class="task-completed-text">
+                            <strong>Koordinasi Humas ke BEM Kampus</strong>
+                            <span class="task-meta">Campus Championship • PIC: Divisi Humas</span>
+                        </label>
+                        <span class="status status-done">Selesai</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODUL ABSENSI DIGITAL -->
+        <section id="absensi-section" class="tab-content">
+            <div class="dashboard-card">
+                <div class="card-header-flex">
+                    <div>
+                        <h3>📝 Rekap Absensi Digital Kegiatan</h3>
+                        <p class="text-muted">Pencatatan kehadiran rapat, latihan rutin (scrim), dan event.</p>
+                    </div>
+                    <button class="button btn-sm" id="btn-open-absensi-modal">+ Buat Sesi Absensi Baru</button>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Tanggal Event</th>
+                                <th>Nama Kegiatan / Agenda</th>
+                                <th>Total Anggota Hadir</th>
+                                <th>Persentase</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="absensi-table-body">
+                            <tr>
+                                <td>02 Okt 2026</td>
+                                <td>Rapat Pleno Evaluasi Proker</td>
+                                <td>42 / 45 Pengurus</td>
+                                <td><strong style="color:#4ade80;">93%</strong></td>
+                                <td><button class="btn-action">Unduh Rekap PDF</button></td>
+                            </tr>
+                            <tr>
+                                <td>25 Sep 2026</td>
+                                <td>Scrim Rutin Divisi Valorant & MLBB</td>
+                                <td>20 / 20 Player</td>
+                                <td><strong style="color:#4ade80;">100%</strong></td>
+                                <td><button class="btn-action">Unduh Rekap PDF</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- MODAL 1: TAMBAH ANGGOTA -->
+    <div class="modal-overlay" id="modal-add-member">
+        <div class="modal-content">
+            <button type="button" class="modal-close">&times;</button>
+            <div class="modal-header">
+                <h2>👥 Tambah Anggota Baru</h2>
+                <p>Mendaftarkan anggota/pengurus baru ke database</p>
+            </div>
+            <form id="form-add-member">
+                <div class="form-group">
+                    <label for="input-nim">NIM Mahasiswa</label>
+                    <input type="text" id="input-nim" placeholder="Contoh: 230101099" required>
+                </div>
+                <div class="form-group">
+                    <label for="input-nama">Nama Lengkap</label>
+                    <input type="text" id="input-nama" placeholder="Contoh: Budi Santoso" required>
+                </div>
+                <div class="form-group">
+                    <label for="select-divisi">Divisi Game / Unit</label>
+                    <select id="select-divisi" class="form-control-select">
+                        <option value="Valorant">Divisi Valorant</option>
+                        <option value="Mobile Legends">Divisi Mobile Legends</option>
+                        <option value="Caster">Divisi Caster & Stream</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="input-jabatan">Jabatan / Role</label>
+                    <input type="text" id="input-jabatan" placeholder="Contoh: Anggota Aktif / Analyst" required>
+                </div>
+                <button type="submit" class="button button-full">Simpan Anggota</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 2: BUAT TUGAS BARU -->
+    <div class="modal-overlay" id="modal-add-task">
+        <div class="modal-content">
+            <button type="button" class="modal-close">&times;</button>
+            <div class="modal-header">
+                <h2>📌 Delegasi Tugas Panitia</h2>
+                <p>Buat instruksi baru untuk kepanitiaan/divisi</p>
+            </div>
+            <form id="form-add-task">
+                <div class="form-group">
+                    <label for="input-task-title">Judul Tugas / Instruksi</label>
+                    <input type="text" id="input-task-title" placeholder="Contoh: Penyusunan Layout Stage" required>
+                </div>
+                <div class="form-group">
+                    <label for="input-task-event">Nama Event / Kegiatan</label>
+                    <input type="text" id="input-task-event" placeholder="Contoh: Campus Championship 2026" required>
+                </div>
+                <div class="form-group">
+                    <label for="input-task-pic">PIC / Divisi Penanggung Jawab</label>
+                    <input type="text" id="input-task-pic" placeholder="Contoh: Divisi Event / Perkap" required>
+                </div>
+                <button type="submit" class="button button-full">Delegasikan Tugas</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 3: TAMBAH PROKER -->
+    <div class="modal-overlay" id="modal-add-proker">
+        <div class="modal-content">
+            <button type="button" class="modal-close">&times;</button>
+            <div class="modal-header">
+                <h2>🎯 Tambah Program Kerja</h2>
+                <p>Masukkan agenda atau program kerja baru UKM</p>
+            </div>
+            <form id="form-add-proker">
+                <div class="form-group">
+                    <label for="input-proker-title">Nama Program Kerja</label>
+                    <input type="text" id="input-proker-title" placeholder="Contoh: Esport National League 2026" required>
+                </div>
+                <div class="form-group">
+                    <label for="input-proker-desc">Deskripsi Singkat</label>
+                    <input type="text" id="input-proker-desc" placeholder="Penjelasan singkat proker..." required>
+                </div>
+                <div class="form-group">
+                    <label for="select-proker-status">Status Proker</label>
+                    <select id="select-proker-status" class="form-control-select">
+                        <option value="Perencanaan">Perencanaan</option>
+                        <option value="Sedang Berjalan">Sedang Berjalan</option>
+                        <option value="Terlaksana">Terlaksana</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="input-proker-date">Target Tanggal Selesai</label>
+                    <input type="text" id="input-proker-date" placeholder="Contoh: 20 November 2026" required>
+                </div>
+                <button type="submit" class="button button-full">Simpan Proker</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 4: BUAT SESI ABSENSI -->
+    <div class="modal-overlay" id="modal-add-absensi">
+        <div class="modal-content">
+            <button type="button" class="modal-close">&times;</button>
+            <div class="modal-header">
+                <h2>📝 Buat Sesi Absensi Baru</h2>
+                <p>Buka sesi presensi digital untuk kegiatan UKM</p>
+            </div>
+            <form id="form-add-absensi">
+                <div class="form-group">
+                    <label for="input-absensi-date">Tanggal Kegiatan</label>
+                    <input type="text" id="input-absensi-date" placeholder="Contoh: 05 Okt 2026" required>
+                </div>
+                <div class="form-group">
+                    <label for="input-absensi-event">Nama Agenda / Rapat</label>
+                    <input type="text" id="input-absensi-event" placeholder="Contoh: Rapat Koordinasi Grand Final" required>
+                </div>
+                <div class="form-group">
+                    <label for="input-absensi-target">Target Peserta</label>
+                    <input type="text" id="input-absensi-target" placeholder="Contoh: 35 Pengurus" required>
+                </div>
+                <button type="submit" class="button button-full">Buka Sesi Presensi</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="{{ asset('script.js') }}"></script>
+</body>
+
+</html>
