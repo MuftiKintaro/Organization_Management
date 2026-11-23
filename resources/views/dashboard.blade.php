@@ -46,6 +46,22 @@
 
         <!-- TOPBAR -->
         <header class="dashboard-topbar">
+            @if (session('success'))
+    <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; color: #34d399; padding: 12px 16px; border-radius: 10px; margin-bottom: 20px;">
+        ✅ {{ session('success') }}
+    </div>
+@endif
+
+@if ($errors->any())
+    <div style="background: rgba(239, 68, 68, 0.15); border: 1px solid #ef4444; color: #f87171; padding: 12px 16px; border-radius: 10px; margin-bottom: 20px;">
+        <strong>⚠️ Terjadi kesalahan validasi:</strong>
+        <ul style="margin: 6px 0 0 18px;">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
             <div>
                 <h2>Pusat Kendali Organisasi UKM</h2>
                 <p class="text-muted">Pantau seluruh aktivitas, anggota, dan tugas organisasi dalam satu tempat.</p>
@@ -254,16 +270,29 @@
                                 $statusClass = 'status-done';
                             }
                         @endphp
-                        <article class="card">
-                            <div class="card-body">
-                                <span class="status {{ $statusClass }}">{{ $statusText }}</span>
-                                <h3>{{ $item->icon ?? '🎮' }} {{ $item->judul }}</h3>
-                                <p>{{ $item->deskripsi }}</p>
-                                @if($item->tanggal)
-                                    <p class="date">📅 Target: {{ $item->tanggal }}</p>
-                                @endif
-                            </div>
-                        </article>
+                       <article class="card">
+    <div class="card-body">
+        <span class="status {{ $statusClass }}">{{ $statusText }}</span>
+        <h3>{{ $item->icon ?? '🎮' }} {{ $item->judul }}</h3>
+        <p>{{ $item->deskripsi }}</p>
+        @if($item->tanggal)
+            <p class="date">📅 Target: {{ $item->tanggal }}</p>
+        @endif
+
+        <div style="display: flex; gap: 8px; margin-top: 14px; padding-top: 12px; border-top: 1px solid #334155;">
+            <a href="{{ route('programs.edit', $item->id) }}" class="button button-outline btn-sm" style="flex: 1; text-align: center;">
+                ✏️ Edit
+            </a>
+            <form action="{{ route('programs.destroy', $item->id) }}" method="POST" style="flex: 1;" onsubmit="return confirm('Yakin ingin menghapus program kerja ini?');">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="button btn-sm" style="width: 100%; background-color: #ef4444; border-color: #ef4444;">
+                    🗑️ Hapus
+                </button>
+            </form>
+        </div>
+    </div>
+</article>
                     @empty
                         <p style="grid-column: 1/-1; text-align: center; color: #94a3b8;">Belum ada data program kerja di database.</p>
                     @endforelse
@@ -416,29 +445,34 @@
                 <h2>🎯 Tambah Program Kerja</h2>
                 <p>Masukkan agenda atau program kerja baru UKM</p>
             </div>
-            <form id="form-add-proker">
-                <div class="form-group">
-                    <label for="input-proker-title">Nama Program Kerja</label>
-                    <input type="text" id="input-proker-title" placeholder="Contoh: Esport National League 2026" required>
-                </div>
-                <div class="form-group">
-                    <label for="input-proker-desc">Deskripsi Singkat</label>
-                    <input type="text" id="input-proker-desc" placeholder="Penjelasan singkat proker..." required>
-                </div>
-                <div class="form-group">
-                    <label for="select-proker-status">Status Proker</label>
-                    <select id="select-proker-status" class="form-control-select">
-                        <option value="Perencanaan">Perencanaan</option>
-                        <option value="Sedang Berjalan">Sedang Berjalan</option>
-                        <option value="Terlaksana">Terlaksana</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="input-proker-date">Target Tanggal Selesai</label>
-                    <input type="text" id="input-proker-date" placeholder="Contoh: 20 November 2026" required>
-                </div>
-                <button type="submit" class="button button-full">Simpan Proker</button>
-            </form>
+           <form id="form-add-proker" action="{{ route('programs.store') }}" method="POST">
+    @csrf
+    <div class="form-group">
+        <label for="input-proker-title">Nama / Judul Program Kerja</label>
+        <input type="text" id="input-proker-title" name="judul" value="{{ old('judul') }}" placeholder="Contoh: Esport National League 2026" required>
+    </div>
+    <div class="form-group">
+        <label for="input-proker-icon">Icon Emoji</label>
+        <input type="text" id="input-proker-icon" name="icon" value="{{ old('icon', '🏆') }}" placeholder="Contoh: 🏆 atau 🎮">
+    </div>
+    <div class="form-group">
+        <label for="input-proker-desc">Deskripsi Singkat</label>
+        <input type="text" id="input-proker-desc" name="deskripsi" value="{{ old('deskripsi') }}" placeholder="Penjelasan singkat proker..." required>
+    </div>
+    <div class="form-group">
+        <label for="select-proker-status">Status Proker</label>
+        <select id="select-proker-status" name="status" class="form-control-select">
+            <option value="Perencanaan" {{ old('status') == 'Perencanaan' ? 'selected' : '' }}>Perencanaan</option>
+            <option value="Sedang Berjalan" {{ old('status') == 'Sedang Berjalan' ? 'selected' : '' }}>Sedang Berjalan</option>
+            <option value="Terlaksana" {{ old('status') == 'Terlaksana' ? 'selected' : '' }}>Terlaksana</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="input-proker-date">Target Tanggal Selesai</label>
+        <input type="text" id="input-proker-date" name="tanggal" value="{{ old('tanggal') }}" placeholder="Contoh: 20 November 2026">
+    </div>
+    <button type="submit" class="button button-full">Simpan Proker ke Database</button>
+</form>
         </div>
     </div>
 
