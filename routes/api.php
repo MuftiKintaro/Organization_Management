@@ -1,12 +1,17 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProgramController;
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Week 11 - Task 01: Public Login API
+Route::post('/login', [AuthController::class, 'login']);
 
-// Week 10 - Task 03: RESTful Program API
-Route::apiResource('programs', ProgramController::class);
+// Week 11 - Task 02: Protected Routes (Wajib Bearer Token JWT)
+Route::middleware('auth:api')->group(function () {
+    Route::get('/me', [AuthController::class, 'me']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+
+    // Endpoint Program API dari Week 10 yang diproteksi JWT
+    Route::apiResource('programs', ProgramController::class);
+});
