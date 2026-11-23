@@ -1,12 +1,16 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProgramController;
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Public Route untuk Login
+Route::post('/login', [AuthController::class, 'login']);
 
-// RESTful API Endpoint untuk Program Kerja (/api/programs)
-Route::apiResource('programs', ProgramController::class);
+// Protected Routes (Wajib menyertakan Header: Authorization: Bearer <token>)
+Route::middleware('jwt.verify')->group(function () {
+    Route::get('/me', [AuthController::class, 'me']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+
+    Route::apiResource('programs', ProgramController::class);
+});
