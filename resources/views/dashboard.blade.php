@@ -31,7 +31,6 @@
             <a href="#panitia" class="nav-item" data-tab="panitia">🎪 Kepanitiaan & Tugas</a>
             <a href="#absensi" class="nav-item" data-tab="absensi">📝 Rekap Absensi</a>
 
-            <!-- Link ke Halaman Pengurus & Landing Page -->
             <a href="{{ url('/pengurus') }}" class="nav-item" style="color: #06b6d4; font-weight: bold;">👤 Pengurus & Proker (MVC)</a>
             <a href="{{ url('/') }}" class="nav-item">🏠 Landing Page</a>
         </nav>
@@ -54,6 +53,13 @@
                 <span class="status-indicator"></span> Mode Akses: <strong>Ketua Umum (Full Access)</strong>
             </div>
         </header>
+
+        <!-- FLASH MESSAGE SUKSES CRUD -->
+        @if (session('success'))
+            <div style="background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; color: #34d399; padding: 12px 18px; border-radius: 10px; margin-bottom: 20px; font-size: 14px;">
+                ✅ {{ session('success') }}
+            </div>
+        @endif
 
         <!-- RINGKASAN STATISTIK UTAMA -->
         <section id="overview-section" class="tab-content active">
@@ -93,7 +99,6 @@
 
             <!-- MODUL TUGAS & KEPANITIAAN CEPAT -->
             <div class="dashboard-grid-2col">
-                <!-- PANEL MONITORING TUGAS -->
                 <div class="dashboard-card">
                     <div class="card-header-flex">
                         <h3>📌 Penugasan Kepanitiaan Aktif</h3>
@@ -127,7 +132,6 @@
                     </div>
                 </div>
 
-                <!-- PANEL ABSENSI TERAKHIR -->
                 <div class="dashboard-card">
                     <div class="card-header-flex">
                         <h3>📝 Kehadiran Kegiatan Terakhir</h3>
@@ -176,7 +180,6 @@
                     <button class="button btn-sm" id="btn-open-member-modal">+ Tambah Anggota Baru</button>
                 </div>
 
-                <!-- FILTER & SEARCH BAR -->
                 <div class="table-filter-bar">
                     <input type="text" id="search-member-input" placeholder="🔍 Cari Nama / NIM Anggota..." class="filter-input">
                     <select id="filter-division-select" class="filter-select">
@@ -232,7 +235,7 @@
             </div>
         </section>
 
-        <!-- MODUL PROGRAM KERJA & KEGIATAN (DATA MYSQL VIA ELOQUENT ORM) -->
+        <!-- MODUL PROGRAM KERJA & KEGIATAN (CRUD LENGKAP VIA PROGRAMCONTROLLER) -->
         <section id="proker-section" class="tab-content">
             <div class="dashboard-card">
                 <div class="card-header-flex">
@@ -240,7 +243,7 @@
                         <h3>Manajemen Program Kerja (Proker) & Kegiatan</h3>
                         <p class="text-muted">Status progres dan jadwal pelaksanaan agenda UKM dari database.</p>
                     </div>
-                    <button class="button btn-sm" id="btn-open-proker-modal">+ Tambah Proker</button>
+                    <a href="{{ route('programs.create') }}" class="button btn-sm">+ Tambah Proker</a>
                 </div>
 
                 <div class="card-grid" id="proker-grid-container">
@@ -262,6 +265,15 @@
                                 @if($item->tanggal)
                                     <p class="date">📅 Target: {{ $item->tanggal }}</p>
                                 @endif
+
+                                <div style="display: flex; gap: 8px; margin-top: 14px; padding-top: 12px; border-top: 1px solid #334155;">
+                                    <a href="{{ route('programs.edit', $item->id) }}" class="btn-action" style="flex: 1; text-align: center;">✏️ Edit</a>
+                                    <form action="{{ route('programs.destroy', $item->id) }}" method="POST" style="flex: 1;" onsubmit="return confirm('Yakin ingin menghapus proker ini?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn-action btn-delete-row" style="width: 100%;">🗑️ Hapus</button>
+                                    </form>
+                                </div>
                             </div>
                         </article>
                     @empty
@@ -404,40 +416,6 @@
                     <input type="text" id="input-task-pic" placeholder="Contoh: Divisi Event / Perkap" required>
                 </div>
                 <button type="submit" class="button button-full">Delegasikan Tugas</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- MODAL 3: TAMBAH PROKER -->
-    <div class="modal-overlay" id="modal-add-proker">
-        <div class="modal-content">
-            <button type="button" class="modal-close">&times;</button>
-            <div class="modal-header">
-                <h2>🎯 Tambah Program Kerja</h2>
-                <p>Masukkan agenda atau program kerja baru UKM</p>
-            </div>
-            <form id="form-add-proker">
-                <div class="form-group">
-                    <label for="input-proker-title">Nama Program Kerja</label>
-                    <input type="text" id="input-proker-title" placeholder="Contoh: Esport National League 2026" required>
-                </div>
-                <div class="form-group">
-                    <label for="input-proker-desc">Deskripsi Singkat</label>
-                    <input type="text" id="input-proker-desc" placeholder="Penjelasan singkat proker..." required>
-                </div>
-                <div class="form-group">
-                    <label for="select-proker-status">Status Proker</label>
-                    <select id="select-proker-status" class="form-control-select">
-                        <option value="Perencanaan">Perencanaan</option>
-                        <option value="Sedang Berjalan">Sedang Berjalan</option>
-                        <option value="Terlaksana">Terlaksana</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="input-proker-date">Target Tanggal Selesai</label>
-                    <input type="text" id="input-proker-date" placeholder="Contoh: 20 November 2026" required>
-                </div>
-                <button type="submit" class="button button-full">Simpan Proker</button>
             </form>
         </div>
     </div>

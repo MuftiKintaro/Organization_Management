@@ -9,6 +9,11 @@ class Program extends Model
 {
     use HasFactory;
 
-    // Menentukan kolom yang diizinkan untuk diisi
-    protected $fillable = ['judul', 'icon', 'deskripsi', 'status', 'tanggal'];
+    protected $fillable = [
+        'judul',
+        'icon',
+        'deskripsi',
+        'status',
+        'tanggal',
+    ];
 }
